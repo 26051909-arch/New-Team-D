@@ -1,4 +1,5 @@
 #include "Base/Base.h"
+#include "Game/Player.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -84,10 +85,19 @@ void Init(void)
 	//ƒQ[ƒ€‹N“®‚Éˆê“x‚¾‚¯ŒÄ‚Î‚ê‚é
 	//-----------------------------------------------------
 	
+	//¼‰º
+
+	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
 
 
 
 
+
+
+	
+
+
+	//ì‘º
 
 
 
