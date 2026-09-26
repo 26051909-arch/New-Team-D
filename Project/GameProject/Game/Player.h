@@ -7,7 +7,8 @@ private:
 	enum {
 		eAnimIdle = 0,
 		eAnimRun,
-		eAnimJump,
+		eAnimJumpUp,
+		eAnimJumpDown,
 		eAnimTurisagari,
 		eAnimShootWeb,
 		eAnimDamage,
@@ -29,6 +30,8 @@ private:
 
 	//状態変数
 	int m_state;
+	//反転フラグ
+	bool m_flip;
 	//着地フラグ
 	bool m_is_ground;
 	CImage m_img;
