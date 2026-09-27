@@ -1,5 +1,6 @@
 #include "Base/Base.h"
 #include "Game/Player.h"
+#include"Game/Field.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -89,10 +90,12 @@ void Init(void)
 
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
 
+	ADD_RESOURCE("ForeGround", CImage::CreateImage("Image/ground/ground.png"));
+
 
 
 	new Player(CVector2D(256, 540), false);
-
+	new Field(CVector2D(0, 0));
 
 	
 

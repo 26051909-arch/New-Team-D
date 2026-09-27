@@ -1,4 +1,7 @@
 #include"Player.h"
+#include"Field.h"
+
+
 
 Player::Player(const CVector2D& pos, bool flip) : Base(eType_Player) 
 {
@@ -6,9 +9,9 @@ Player::Player(const CVector2D& pos, bool flip) : Base(eType_Player)
 	//座標設定
 	m_pos_old = m_pos = pos;
 	//サイズ設定
-	m_img.SetSize(96, 96);
+	m_img.SetSize(160, 160);
 	//中心位置設定
-	m_img.SetCenter(48, 93);
+	m_img.SetCenter(80, 155);
 
 
 	//反転フラグ
@@ -24,18 +27,18 @@ Player::Player(const CVector2D& pos, bool flip) : Base(eType_Player)
 void Player::StateIdle()
 {
 	//移動量
-	const float move_speed = 6;
+	const float move_speed = 8;
 	//移動フラグ
 	bool move_flag = false;
 	//ジャンプ力
-	const float jump_pow = 16;
+	const float jump_pow = 14;
 
 	//右移動
 	if (HOLD(CInput::eRight)) {
 		//移動量を設定
 		m_pos.x += move_speed;
 		//反転フラグ
-		m_flip = false;
+		m_flip = true;
 		move_flag = true;
 	}
 
@@ -44,7 +47,7 @@ void Player::StateIdle()
 		//移動量を設定
 		m_pos.x += -move_speed;
 		//反転フラグ
-		m_flip = true;
+		m_flip = false;
 		move_flag = true;
 	}
 
@@ -71,12 +74,13 @@ void Player::StateIdle()
 	else
 	{
 		if (move_flag) {
-			//走るアニメーション
-			m_img.ChangeAnimation(eAnimRun);
+				//走るアニメーション
+				m_img.ChangeAnimation(eAnimRun, true);
+				
 		}
 		else {
-			//待機アニメーション
-			m_img.ChangeAnimation(eAnimIdle);
+				//待機アニメーション
+				m_img.ChangeAnimation(eAnimIdle, true);
 		}
 	}
 
@@ -140,9 +144,10 @@ void Player::Draw()
 {
 	m_img.SetPos(m_pos);
 
+	m_img.SetFlipH(m_flip);
+
 	m_img.Draw();
 
-	m_img.SetFlipH(m_flip);
 
 }
 
@@ -151,39 +156,56 @@ void Player::Draw()
 
 void Player::Collision(Base* b) 
 {
-
+	switch (b->m_type) {
+	case eType_Field:
+		//Feild型へキャスト、型変換できたら
+		if (Field* f = dynamic_cast <Field*>(b)) {
+			//地面より下にいったら
+			if (m_pos.y > f->GetGroundY()) {
+				//地面の高さに戻す
+				m_pos.y = f->GetGroundY();
+				//落下速度リセット
+				m_vec.y = 0;
+				//接地フラグON
+				m_is_ground = true;
+			}
+		}
+		break;
+	}
 }
 
 static TexAnim _idle[] = {
-	{0,2},
-	{1,2},
-	{2,2},
-	{3,2},
-	{4,2},
+	{0,4},
+	{1,4},
+	{2,4},
+	{3,4},
+	{4,4},
 };
 
 static TexAnim _run[] = {
-	{5,4},
-	{6,4},
-	{7,4},
-	{8,4},
-	{9,4},
 	{10,4},
-};
-
-static TexAnim _jumpUp[] = {
 	{11,4},
 	{12,4},
 	{13,4},
 	{14,4},
-	{15,4},
+	//{15,4},
+};
+
+static TexAnim _jumpUp[] = {
+	{18,2},
+	{19,2},
+	{20,2},
+	{21,2},
+	{22,2},
+	//{23,2},
 };
 
 static TexAnim _jumpDown[] = {
-	{16,4},
-	{17,4},
-	{18,4},
-	{19,4},
+	{23,2},
+	{24,2},
+	{25,2},
+	{26,2},
+	//{27,2},
 };
 
 static TexAnim _turisagari[] = {

@@ -36,6 +36,10 @@ private:
 	bool m_is_ground;
 	CImage m_img;
 
+	
+
+
+
 public:
 	Player(const CVector2D& pos, bool flip);
 	void Update();
