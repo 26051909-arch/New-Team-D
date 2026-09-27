@@ -1,5 +1,6 @@
 #include "Base/Base.h"
 #include "Game/Player.h"
+#include"Game/SpiderBullet.h"
 #include"Game/Field.h"
 
 void MainLoop(void) {
@@ -91,6 +92,9 @@ void Init(void)
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
 
 	ADD_RESOURCE("ForeGround", CImage::CreateImage("Image/ground/ground.png"));
+	ADD_RESOURCE("Mount", CImage::CreateImage("Image/ground/Grass Mountains.png"));
+
+	ADD_RESOURCE("SpiderBullet", CImage::CreateImage("Image/Player/SpiderBullet.png"));
 
 
 

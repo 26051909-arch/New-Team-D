@@ -1,4 +1,5 @@
 #include"Player.h"
+#include"SpiderBullet.h"
 #include"Field.h"
 
 
@@ -49,6 +50,31 @@ void Player::StateIdle()
 		//反転フラグ
 		m_flip = false;
 		move_flag = true;
+	}
+
+
+	//弾の発射
+	if (PUSH(CInput::eMouseL)) {
+		if (m_flip == false) {
+			//左へ
+			CVector2D bulletPos;
+
+			bulletPos.x = m_pos.x - 30;	//プレイヤーの左端
+			bulletPos.y = m_pos.y - 20;		//プレイヤーの胸辺り
+
+			SpiderBullet* b = new SpiderBullet(bulletPos);
+			b->m_dir = -1;
+		}
+		else {
+			//右へ
+			CVector2D bulletPos;
+
+			bulletPos.x = m_pos.x + 30;	//プレイヤーの右端
+			bulletPos.y = m_pos.y - 20;		//プレイヤーの胸辺り
+
+			SpiderBullet* b = new SpiderBullet(bulletPos);
+			b->m_dir = 1;
+		}
 	}
 
 

@@ -6,6 +6,8 @@ class Field : public Base {
 private:
 	//前景
 	CImage m_foreground;
+	//遠景（仮）
+	CImage m_mount;
 
 	//地面の高さ
 	float m_ground_y;
