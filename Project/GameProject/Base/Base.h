@@ -1,6 +1,7 @@
 #pragma once
 enum {
     eType_Field,
+    eType_Tree,
     eType_Map,
     eType_Door,
     eType_AreaChange,

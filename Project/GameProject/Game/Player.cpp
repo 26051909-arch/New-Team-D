@@ -1,6 +1,7 @@
 #include"Player.h"
 #include"SpiderBullet.h"
 #include"Field.h"
+#include"Tree.h"
 
 
 
@@ -193,6 +194,22 @@ void Player::Collision(Base* b)
 				//落下速度リセット
 				m_vec.y = 0;
 				//接地フラグON
+				m_is_ground = true;
+			}
+		}
+		break;
+
+	case eType_Tree:
+		if (Tree* t = dynamic_cast<Tree*>(b)) {
+			// 枝の範囲内にいるか
+			bool inXRange = (m_pos.x > t->m_pos.x - 400 && m_pos.x < t->m_pos.x + 400);
+			bool aboveBranch = (m_pos_old.y <= t->GetGroundY()); // 前フレームで枝より上にいたか
+			bool falling = (m_vec.y > 0); // 下方向に移動しているか
+
+			// 枝の上から落ちてきた場合のみ乗る
+			if (inXRange && falling && aboveBranch && m_pos.y > t->GetGroundY()) {
+				m_pos.y = t->GetGroundY();
+				m_vec.y = 0;
 				m_is_ground = true;
 			}
 		}

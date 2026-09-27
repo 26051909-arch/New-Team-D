@@ -2,6 +2,7 @@
 #include "Game/Player.h"
 #include"Game/SpiderBullet.h"
 #include"Game/Field.h"
+#include"Game/Tree.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -93,6 +94,8 @@ void Init(void)
 
 	ADD_RESOURCE("ForeGround", CImage::CreateImage("Image/ground/ground.png"));
 	ADD_RESOURCE("Mount", CImage::CreateImage("Image/ground/Grass Mountains.png"));
+	ADD_RESOURCE("Tree", CImage::CreateImage("Image/ground/tree.png"));
+
 
 	ADD_RESOURCE("SpiderBullet", CImage::CreateImage("Image/Player/SpiderBullet.png"));
 
@@ -100,7 +103,7 @@ void Init(void)
 
 	new Player(CVector2D(256, 540), false);
 	new Field(CVector2D(0, 0));
-
+	new Tree(CVector2D(0, 685));
 	
 
 

@@ -2,25 +2,22 @@
 #include"Base/Base.h"
 
 
-class Field : public Base {
+class Tree : public Base
+{
 private:
-	//前景
-	CImage m_foreground;
-	//近景
-	//CImage m_tree;
-	//遠景（仮）
-	CImage m_mount;
+
+	CImage m_tree;
 
 	//地面の高さ
 	float m_ground_y;
 
 public:
-	//コンストラクタ
-	Field(const CVector2D& pos);
+	Tree(const CVector2D& pos);
 	void Draw();
 
 	//地面の高さを取得
 	float GetGroundY() {
 		return m_ground_y;
 	}
+
 };
