@@ -20,6 +20,9 @@
     <ClInclude Include="Game\Effect.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\StickyWeb.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -39,6 +42,9 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Effect.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\StickyWeb.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>

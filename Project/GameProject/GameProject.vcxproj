@@ -24,6 +24,7 @@
     <ClInclude Include="Game\Field.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\SpiderBullet.h" />
+    <ClInclude Include="Game\StickyWeb.h" />
     <ClInclude Include="Game\Tree.h" />
     <ClInclude Include="Global.h" />
   </ItemGroup>
@@ -33,6 +34,7 @@
     <ClCompile Include="Game\Field.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\SpiderBullet.cpp" />
+    <ClCompile Include="Game\StickyWeb.cpp" />
     <ClCompile Include="Game\Tree.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
