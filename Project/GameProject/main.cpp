@@ -102,16 +102,16 @@ void Init(void)
 
 
 	new Player(CVector2D(256, 540), false);
-	new Field(CVector2D(0, 0));
+	//new Field(CVector2D(0, 0));
 	new Tree(CVector2D(0, 685));
 	
 
 
 	//êÏë∫
+	ADD_RESOURCE("Back_Ground", CImage::CreateImage("Image/Field/Back_Ground.png", Field::_anim_data, 724, 543));
 
 
-
-
+	new Field(CVector2D(0, 0));
 
 }
 

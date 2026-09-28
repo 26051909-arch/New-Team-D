@@ -1,24 +1,22 @@
-#pragma once
-#include"Base/Base.h"
-
+#pragma once 
+#include "../Base/Base.h"
 
 class Field : public Base {
 private:
-	//前景
+	enum {
+		eAnimBgAnim,
+	};
+	CImage m_img; // 背景画像用オブジェクト
 	CImage m_foreground;
-	//近景
-	//CImage m_tree;
-	//遠景（仮）
-	CImage m_mount;
-
 	//地面の高さ
 	float m_ground_y;
 
 public:
-	//コンストラクタ
-	Field(const CVector2D& pos);
-	void Draw();
-
+	Field(const CVector2D& pos); // コンストラクタ
+	void Update(); // 更新処理
+	void Draw(); // 描画処理
+	// main.cppのADD\_RESOURCEで使用するアニメーションデータ
+	static TexAnimData _anim_data[];
 	//地面の高さを取得
 	float GetGroundY() {
 		return m_ground_y;
