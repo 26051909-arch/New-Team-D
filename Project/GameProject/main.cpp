@@ -1,9 +1,11 @@
 #include "Base/Base.h"
 #include "Game/Player.h"
 #include"Game/SpiderBullet.h"
+#include"Game/StickyWeb.h"
 #include"Game/Effect.h"
 #include"Game/Field.h"
 #include"Game/Tree.h"
+#include"GAme/Tree2.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -93,11 +95,15 @@ void Init(void)
 
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
 	ADD_RESOURCE("Effect", CImage::CreateImage("Image/Player/web.png", Player::_anim_data, 1024, 1024));
+	ADD_RESOURCE("StickyWeb", CImage::CreateImage("Image/Player/stickyweb.png"));
 
 
 	ADD_RESOURCE("ForeGround", CImage::CreateImage("Image/ground/ground.png"));
 	ADD_RESOURCE("Mount", CImage::CreateImage("Image/ground/Grass Mountains.png"));
 	ADD_RESOURCE("Tree", CImage::CreateImage("Image/ground/tree.png"));
+	//ADD_RESOURCE("Tree2", CImage::CreateImage("Image/ground/tree.png"));
+
+
 
 
 	ADD_RESOURCE("SpiderBullet", CImage::CreateImage("Image/Player/SpiderBullet.png"));

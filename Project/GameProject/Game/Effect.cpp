@@ -1,4 +1,5 @@
 #include"Effect.h"
+#include"StickyWeb.h"
 
 
 Effect::Effect(const CVector2D& pos) : Base(eType_Effect)
@@ -18,7 +19,7 @@ void Effect::Update()
 	if (m_img.CheckAnimationEnd())
 	{
 		// エフェクトが終わったら新しいオブジェクトを生成
-		//new StickyWeb(m_pos);
+		new StickyWeb(m_pos);
 
 		SetKill();
 	}

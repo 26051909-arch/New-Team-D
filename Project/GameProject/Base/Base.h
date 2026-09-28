@@ -2,6 +2,7 @@
 enum {
     eType_Field,
     eType_Tree,
+    eType_Tree2,
     eType_Map,
     eType_Door,
     eType_AreaChange,
