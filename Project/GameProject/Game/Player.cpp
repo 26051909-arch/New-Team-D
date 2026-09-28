@@ -202,7 +202,7 @@ void Player::Collision(Base* b)
 	case eType_Tree:
 		if (Tree* t = dynamic_cast<Tree*>(b)) {
 			// Ž}‚Ì”ÍˆÍ“à‚É‚¢‚é‚©
-			bool inXRange = (m_pos.x > t->m_pos.x - 400 && m_pos.x < t->m_pos.x + 400);
+			bool inXRange = (m_pos.x > t->m_pos.x - 480 && m_pos.x < t->m_pos.x + 480);
 			bool aboveBranch = (m_pos_old.y <= t->GetGroundY()); // ‘OƒtƒŒ[ƒ€‚ÅŽ}‚æ‚èã‚É‚¢‚½‚©
 			bool falling = (m_vec.y > 0); // ‰º•ûŒü‚ÉˆÚ“®‚µ‚Ä‚¢‚é‚©
 
