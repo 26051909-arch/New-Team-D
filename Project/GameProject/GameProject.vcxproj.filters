@@ -17,6 +17,9 @@
     <ClInclude Include="Game\Tree.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Effect.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -33,6 +36,9 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Tree.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Effect.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>

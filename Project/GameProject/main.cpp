@@ -1,6 +1,7 @@
 #include "Base/Base.h"
 #include "Game/Player.h"
 #include"Game/SpiderBullet.h"
+#include"Game/Effect.h"
 #include"Game/Field.h"
 #include"Game/Tree.h"
 
@@ -91,6 +92,8 @@ void Init(void)
 	//èºâ∫
 
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
+	ADD_RESOURCE("Effect", CImage::CreateImage("Image/Player/web.png", Player::_anim_data, 1024, 1024));
+
 
 	ADD_RESOURCE("ForeGround", CImage::CreateImage("Image/ground/ground.png"));
 	ADD_RESOURCE("Mount", CImage::CreateImage("Image/ground/Grass Mountains.png"));
@@ -102,8 +105,10 @@ void Init(void)
 
 
 	new Player(CVector2D(256, 540), false);
-	//new Field(CVector2D(0, 0));
-	new Tree(CVector2D(0, 685));
+
+
+	new Tree(CVector2D(0, 670));
+	//new Effect(CVector2D(200, 500));
 	
 
 
@@ -112,6 +117,7 @@ void Init(void)
 
 
 	new Field(CVector2D(0, 0));
+
 
 }
 
