@@ -2,10 +2,10 @@
 #include"StickyWeb.h"
 
 
-Effect::Effect(const CVector2D& pos) : Base(eType_Effect)
+Effect::Effect() : Base(eType_Effect)
 {
 	m_img = COPY_RESOURCE("Effect", CImage);
-	m_pos = pos;
+	//m_pos = pos;
 
 	m_img.SetSize(256, 256);
 	m_img.ChangeAnimation(0, false);
@@ -19,7 +19,7 @@ void Effect::Update()
 	if (m_img.CheckAnimationEnd())
 	{
 		// エフェクトが終わったら新しいオブジェクトを生成
-		new StickyWeb(m_pos);
+		new StickyWeb();
 
 		SetKill();
 	}
@@ -28,7 +28,7 @@ void Effect::Update()
 
 void Effect::Draw()
 {
-	m_img.SetPos(m_pos);
+	//m_img.SetPos();
 	m_img.Draw();
 }
 

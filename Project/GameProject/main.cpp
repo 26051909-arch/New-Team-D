@@ -101,7 +101,7 @@ void Init(void)
 	ADD_RESOURCE("ForeGround", CImage::CreateImage("Image/ground/ground.png"));
 	ADD_RESOURCE("Mount", CImage::CreateImage("Image/ground/Grass Mountains.png"));
 	ADD_RESOURCE("Tree", CImage::CreateImage("Image/ground/tree.png"));
-	//ADD_RESOURCE("Tree2", CImage::CreateImage("Image/ground/tree.png"));
+	ADD_RESOURCE("Tree2", CImage::CreateImage("Image/ground/tree2.png"));
 
 
 
@@ -113,9 +113,12 @@ void Init(void)
 	new Player(CVector2D(256, 540), false);
 
 
-	new Tree(CVector2D(0, 670));
+	new Tree(CVector2D(0, 250));
+	new Tree2();
 	//new Effect(CVector2D(200, 500));
 	
+
+
 
 
 	//êÏë∫

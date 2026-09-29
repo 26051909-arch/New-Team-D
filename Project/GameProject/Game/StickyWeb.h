@@ -8,7 +8,7 @@ private:
 	CImage m_img;
 
 public:
-	StickyWeb(const CVector2D& pos);
+	StickyWeb();
 
 	void Update();
 	void Draw();

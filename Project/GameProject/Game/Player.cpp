@@ -55,7 +55,7 @@ void Player::StateIdle()
 	}
 
 
-	//弾の発射
+	//弾の発射(左右)
 	if (PUSH(CInput::eMouseL)) {
 		if (m_flip == false) {
 			//左へ
@@ -64,7 +64,7 @@ void Player::StateIdle()
 			bulletPos.x = m_pos.x - 30;	//プレイヤーの左端
 			bulletPos.y = m_pos.y - 20;		//プレイヤーの胸辺り
 
-			SpiderBullet* b = new SpiderBullet(bulletPos);
+			SpiderBullet* b = new SpiderBullet(bulletPos, 2);
 			b->m_dir = -1;
 		}
 		else {
@@ -74,9 +74,19 @@ void Player::StateIdle()
 			bulletPos.x = m_pos.x + 30;	//プレイヤーの右端
 			bulletPos.y = m_pos.y - 20;		//プレイヤーの胸辺り
 
-			SpiderBullet* b = new SpiderBullet(bulletPos);
+			SpiderBullet* b = new SpiderBullet(bulletPos, 2);
 			b->m_dir = 1;
 		}
+	}
+
+	//弾の発射(上)
+	if (PUSH(CInput::eMouseR)) {
+		CVector2D bulletPos;
+
+		bulletPos.x = m_pos.x;	//プレイヤーの頭
+		bulletPos.y = m_pos.y;// - 155 + 48;	//プレイヤーの頭
+
+		SpiderBullet* b = new SpiderBullet(bulletPos, 3);
 	}
 
 
@@ -200,7 +210,7 @@ void Player::Collision(Base* b)
 		}
 		break;
 
-	case eType_Tree:
+	/*case eType_Tree:
 		if (Tree* t = dynamic_cast<Tree*>(b)) {
 			// 枝の範囲内にいるか
 			bool inXRange = (m_pos.x > t->m_pos.x - 680 && m_pos.x < t->m_pos.x + 680);
@@ -214,7 +224,7 @@ void Player::Collision(Base* b)
 				m_is_ground = true;
 			}
 		}
-		break;
+		break;*/
 
 	}
 }
@@ -258,10 +268,10 @@ static TexAnim _turisagari[] = {
 };
 
 static TexAnim _shootweb[] = {
-	{21,4},
-	{22,4},
-	{23,4},
-	{24,4},
+	{36,6},
+	{37,6},
+	{38,6},
+	{39,6},
 };
 
 static TexAnim _damage[] = {

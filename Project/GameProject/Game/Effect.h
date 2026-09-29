@@ -13,7 +13,7 @@ private:
 	CImage m_img;
 
 public:
-	Effect(const CVector2D& pos);
+	Effect();
 	void Update();
 	void Draw();
 

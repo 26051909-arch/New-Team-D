@@ -3,11 +3,13 @@
 #include"Tree.h"
 #include"Effect.h"
 
-SpiderBullet::SpiderBullet(const CVector2D& pos) : Base(eType_Bullet)
+SpiderBullet::SpiderBullet(const CVector2D& pos, float houkou) : Base(eType_Bullet)
 {
 	m_img = COPY_RESOURCE("SpiderBullet", CImage);
 
 	m_pos = pos;
+
+	m_houkou = houkou;
 
 	//”¼Œa
 	m_rad = 48;
@@ -20,7 +22,13 @@ void SpiderBullet::Update()
 {
 	const int move_speed = 14;
 
-	m_pos.x += move_speed * m_dir;
+	if (m_houkou == 2) {
+		m_pos.x += move_speed * m_dir;
+	}
+	else {
+		m_pos.y += -move_speed;
+	}
+
 
 	if (m_pos.x < -100 || m_pos.x > SCREEN_WIDTH + 100) {
 		SetKill();
@@ -41,7 +49,7 @@ void SpiderBullet::Collision(Base* b)
 	case eType_Tree:
 		if (Base::CollisionCircle(this, b))
 		{
-			new Effect(CVector2D(60, 650));
+			new Effect();
 
 			SetKill();
 		}
