@@ -21,6 +21,14 @@ Enemy1::Enemy1(const CVector2D& pos) : Base(eType_Enemy1)
 }
 
 
+void Enemy1::ToDeath()
+{
+	if (m_state != eState_Death) {
+		m_state = eState_Death;
+		m_img.ChangeAnimation(eAnimDeath); // アニメーションを繭に切り替え
+	}
+}
+
 void Enemy1::StateIdle()
 {
 	//移動量
@@ -39,13 +47,13 @@ void Enemy1::StateIdle()
 }
 
 
-void Enemy1::StateDeath()
+/*void Enemy1::StateDeath()
 {
-	/*m_img.ChangeAnimation(eAnimDeath, false);
+	m_img.ChangeAnimation(eAnimDeath, false);
 	if (m_img.CheckAnimationEnd()) {
 		SetKill();
-	}*/
-}
+	}
+}*/
 
 void Enemy1::Update()
 {
@@ -78,18 +86,16 @@ void Enemy1::Draw()
 }
 
 static TexAnim _idle[] = {
-	{0,4},
-	{1,4},
-	{2,4},
-	{3,4},
+	{0,2},
+	{1,2},
+	{2,2},
+	{3,2},
 };
 
 
 static TexAnim _death[] = {
-	{4,3},
-	{5,3},
-	{6,3},
 	{7,3},
+	
 };
 
 

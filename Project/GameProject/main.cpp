@@ -95,7 +95,7 @@ void Init(void)
 	//松下
 
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
-	ADD_RESOURCE("Enemy1", CImage::CreateImage("Image/Enemy/ハエ.png", Player::_anim_data, 32, 32));
+	ADD_RESOURCE("Enemy1", CImage::CreateImage("Image/Enemy/ハエ.png", Enemy1::_anim_data, 32, 32));
 
 	ADD_RESOURCE("Effect", CImage::CreateImage("Image/Player/web.png", Player::_anim_data, 1024, 1024));
 	ADD_RESOURCE("StickyWeb", CImage::CreateImage("Image/Player/stickyweb.png"));

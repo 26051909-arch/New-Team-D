@@ -31,6 +31,7 @@ private:
 
 public:
 	Enemy1(const CVector2D& pos);
+	void ToDeath();
 	void Update();
 	void Draw();
 	//void CollisionCircle(Base* b);

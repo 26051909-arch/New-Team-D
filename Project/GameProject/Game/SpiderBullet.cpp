@@ -61,9 +61,17 @@ void SpiderBullet::Collision(Base* b)
 	case eType_Enemy1:
 		if (Base::CollisionCircle(this, b))
 		{
-			b->SetKill();
+			Enemy1* enemy = (Enemy1*)b;
+			enemy->ToDeath();
+
+			// 弾自身は消滅させる
 			SetKill();
-			new Effect(b->m_pos);
+
+			// 必要であればエフェクトを出す
+			// new Effect(m_pos);
+
+			
+
 		}
 		break;
 	}
