@@ -1,6 +1,8 @@
 #include"SpiderBullet.h"
 #include"Player.h"
+#include"Enemy1.h"
 #include"Tree.h"
+#include"Tree2.h"
 #include"Effect.h"
 
 SpiderBullet::SpiderBullet(const CVector2D& pos, float houkou) : Base(eType_Bullet)
@@ -46,13 +48,24 @@ void SpiderBullet::Draw()
 void SpiderBullet::Collision(Base* b)
 {
 	switch (b->GetType()) {
-	case eType_Tree:
-		if (Base::CollisionCircle(this, b))
+	/*case eType_Tree2:
+		if (Base::CollisionRect(this, b))
 		{
-			new Effect();
+			new Effect(m_pos);
 
 			SetKill();
 		}
+		break;*/
+
+
+	case eType_Enemy1:
+		if (Base::CollisionCircle(this, b))
+		{
+			b->SetKill();
+			SetKill();
+			new Effect(b->m_pos);
+		}
 		break;
 	}
+
 }

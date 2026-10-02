@@ -6,6 +6,7 @@ StickyWeb::StickyWeb() : Base(eType_StickyWeb)
 	//m_pos = pos;
 
 	m_img.SetSize(256, 256);
+
 }
 
 void StickyWeb::Update()
