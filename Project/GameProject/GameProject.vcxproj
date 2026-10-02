@@ -27,6 +27,7 @@
     <ClInclude Include="Game\StickyWeb.h" />
     <ClInclude Include="Game\Tree.h" />
     <ClInclude Include="Game\Tree2.h" />
+    <ClInclude Include="Game\UI.h" />
     <ClInclude Include="Global.h" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +39,7 @@
     <ClCompile Include="Game\StickyWeb.cpp" />
     <ClCompile Include="Game\Tree.cpp" />
     <ClCompile Include="Game\Tree2.cpp" />
+    <ClCompile Include="Game\UI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
