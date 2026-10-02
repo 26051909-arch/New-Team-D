@@ -10,8 +10,15 @@ private:
 	CImage m_img4;
 	CImage m_img5;
 
+	CVector2D m_pos1;
+	CVector2D m_pos2;
+	CVector2D m_pos3;
+	CVector2D m_pos4;
+	CVector2D m_pos5;
+
 public:
 	Tree2();
 
 	void Draw();
+	
 };

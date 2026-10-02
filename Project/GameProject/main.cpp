@@ -1,13 +1,13 @@
 #include "Base/Base.h"
 #include "Game/Player.h"
-#include "Game/SpiderBullet.h"
-#include "Game/StickyWeb.h"
-#include "Game/Effect.h"
-#include "Game/Field.h"
-#include  "Game/Tree.h"
-#include "GAme/Tree2.h"
+#include"Game/Enemy1.h"
+#include"Game/SpiderBullet.h"
+#include"Game/StickyWeb.h"
+#include"Game/Effect.h"
+#include"Game/Field.h"
+#include"Game/Tree.h"
+#include"GAme/Tree2.h"
 #include "Game/UI.h"
-
 void MainLoop(void) {
 	//--------------------------------------------------------------
 	//ÉQÅ[ÉÄíÜÇÃìÆÇ´ÇÕÇ±Ç±Ç…èëÇ≠
@@ -95,6 +95,8 @@ void Init(void)
 	//èºâ∫
 
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
+	ADD_RESOURCE("Enemy1", CImage::CreateImage("Image/Enemy/ÉnÉG.png", Player::_anim_data, 32, 32));
+
 	ADD_RESOURCE("Effect", CImage::CreateImage("Image/Player/web.png", Player::_anim_data, 1024, 1024));
 	ADD_RESOURCE("StickyWeb", CImage::CreateImage("Image/Player/stickyweb.png"));
 
@@ -112,10 +114,10 @@ void Init(void)
 
 
 	new Player(CVector2D(256, 540), false);
+	new Enemy1(CVector2D(0, 540));
 
-
-	new Tree(CVector2D(0, 250));
-	new Tree2();
+	//new Tree(CVector2D(0, 250));
+	//new Tree2();
 	//new Effect(CVector2D(200, 500));
 	
 
