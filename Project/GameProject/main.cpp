@@ -1,13 +1,15 @@
 #include "Base/Base.h"
 #include "Game/Player.h"
-#include"Game/Enemy1.h"
-#include"Game/SpiderBullet.h"
-#include"Game/StickyWeb.h"
-#include"Game/Effect.h"
-#include"Game/Field.h"
-#include"Game/Tree.h"
-#include"GAme/Tree2.h"
+#include "Game/Enemy1.h"
+#include "Game/SpiderBullet.h"
+#include "Game/StickyWeb.h"
+#include "Game/Effect.h"
+#include "Game/Field.h"
+#include "Game/Tree.h"
+#include "Game/Tree2.h"
 #include "Game/UI.h"
+#include "Title/Title.h"
+
 void MainLoop(void) {
 	//--------------------------------------------------------------
 	//ÉQÅ[ÉÄíÜÇÃìÆÇ´ÇÕÇ±Ç±Ç…èëÇ≠
@@ -127,10 +129,8 @@ void Init(void)
 	//êÏë∫
 	ADD_RESOURCE("Back_Ground", CImage::CreateImage("Image/Field/Back_Ground.png", Field::_anim_data, 724, 543));
 	ADD_RESOURCE("UIFont", CFont::CreateInstance("UIFont", "C:\\Windows\\Fonts\\msgothic.ttc", 60));
-
-	new Field(CVector2D(0, 0));
-	new UI();
-
+	ADD_RESOURCE("Title", CImage::CreateImage("Image/Title/Title.png"));
+	new Title();
 }
 
 
