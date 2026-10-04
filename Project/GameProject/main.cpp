@@ -115,8 +115,8 @@ void Init(void)
 
 
 
-	new Player(CVector2D(256, 540), false);
-	new Enemy1(CVector2D(0, 540));
+	//new Player(CVector2D(256, 540), false);
+	//new Enemy1(CVector2D(0, 540));
 
 	//new Tree(CVector2D(0, 250));
 	//new Tree2();

@@ -20,21 +20,25 @@ private:
 
 	//各状態での挙動
 	void StateIdle();
-	void StateDeath();
+	//void StateDeath();
 
 
 	//状態変数
 	int m_state;
+	//反転フラグ
+	bool m_flip;
 	//着地フラグ
 	bool m_is_ground;
+	//重力フラグ
+	int m_grav;
 	CImage m_img;
 
 public:
-	Enemy1(const CVector2D& pos);
+	Enemy1(const CVector2D& pos, bool flip);
 	void ToDeath();
 	void Update();
 	void Draw();
-	//void CollisionCircle(Base* b);
+	void Collision(Base* b);
 
 	static TexAnimData _anim_data[];
 

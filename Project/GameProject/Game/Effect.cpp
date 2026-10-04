@@ -26,7 +26,7 @@ void Effect::Update()
 
 void Effect::Draw()
 {
-	m_img.SetPos(m_pos);
+	m_img.SetPos(m_pos.x - 80, m_pos.y - 60);
 	m_img.Draw();
 }
 

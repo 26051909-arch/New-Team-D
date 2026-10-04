@@ -1,4 +1,5 @@
 #include"Player.h"
+#include"Enemy1.h"
 #include"SpiderBullet.h"
 #include"Field.h"
 #include"Tree.h"
@@ -209,6 +210,13 @@ void Player::Collision(Base* b)
 			}
 		}
 		break;
+
+
+	case eType_Enemy1:
+		if (Base::CollisionCircle(this, b)) {
+			b->SetKill();
+		}
+		
 
 	/*case eType_Tree:
 		if (Tree* t = dynamic_cast<Tree*>(b)) {

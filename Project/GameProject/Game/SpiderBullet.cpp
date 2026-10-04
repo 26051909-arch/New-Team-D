@@ -68,7 +68,7 @@ void SpiderBullet::Collision(Base* b)
 			SetKill();
 
 			// 必要であればエフェクトを出す
-			// new Effect(m_pos);
+			new Effect(m_pos);
 
 			
 
