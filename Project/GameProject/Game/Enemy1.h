@@ -20,11 +20,13 @@ private:
 
 	//各状態での挙動
 	void StateIdle();
-	//void StateDeath();
+	void StateDeath();
 
 
 	//状態変数
 	int m_state;
+	//死亡状態でのタイマー
+	int m_death_timer;
 	//反転フラグ
 	bool m_flip;
 	//着地フラグ

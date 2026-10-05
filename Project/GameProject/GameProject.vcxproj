@@ -22,6 +22,8 @@
     <ClInclude Include="Base\Base.h" />
     <ClInclude Include="Game\Effect.h" />
     <ClInclude Include="Game\Enemy1.h" />
+    <ClInclude Include="Game\Enemy2.h" />
+    <ClInclude Include="Game\Enemy4.h" />
     <ClInclude Include="Game\Field.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Player.h" />
@@ -37,6 +39,8 @@
     <ClCompile Include="Base\Base.cpp" />
     <ClCompile Include="Game\Effect.cpp" />
     <ClCompile Include="Game\Enemy1.cpp" />
+    <ClCompile Include="Game\Enemy2.cpp" />
+    <ClCompile Include="Game\Enemy4.cpp" />
     <ClCompile Include="Game\Field.cpp" />
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\Player.cpp" />

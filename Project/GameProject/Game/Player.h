@@ -34,6 +34,8 @@ private:
 	bool m_flip;
 	//’…’nƒtƒ‰ƒO
 	bool m_is_ground;
+	//‘Ì—Í
+	float m_hp;
 	CImage m_img;
 
 	

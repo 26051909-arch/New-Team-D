@@ -1,6 +1,7 @@
 #include"SpiderBullet.h"
 #include"Player.h"
 #include"Enemy1.h"
+#include"Enemy4.h"
 #include"Tree.h"
 #include"Tree2.h"
 #include"Effect.h"
@@ -71,6 +72,24 @@ void SpiderBullet::Collision(Base* b)
 			new Effect(m_pos);
 
 			
+
+		}
+		break;
+
+
+	case eType_Enemy4:
+		if (Base::CollisionCircle(this, b))
+		{
+			Enemy1* enemy = (Enemy1*)b;
+			enemy->ToDeath();
+
+			// 弾自身は消滅させる
+			SetKill();
+
+			// 必要であればエフェクトを出す
+			new Effect(m_pos);
+
+
 
 		}
 		break;

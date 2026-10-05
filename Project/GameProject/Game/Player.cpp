@@ -1,5 +1,6 @@
 #include"Player.h"
 #include"Enemy1.h"
+#include"Enemy4.h"
 #include"SpiderBullet.h"
 #include"Field.h"
 #include"Tree.h"
@@ -17,7 +18,8 @@ Player::Player(const CVector2D& pos, bool flip) : Base(eType_Player)
 	//中心位置設定
 	m_img.SetCenter(80, 155);
 
-
+	//体力の初期化(最大500)
+	m_hp = 200.0f;
 	//反転フラグ
 	m_flip = flip;
 	//通常状態へ
@@ -146,6 +148,17 @@ void Player:: Update()
 	m_pos_old = m_pos;
 
 
+	//一秒につき１０ずつ体力が下がる
+	if (m_state != eState_Death) {
+		m_hp -= (10.0f / 60.0f);
+
+		if (m_hp <= 0.0f) {
+			m_hp = 0.0f;
+			m_state = eState_Death;
+		}
+	}
+
+
 	switch (m_state) {
 		//通常状態
 	case eState_Idle:
@@ -171,6 +184,7 @@ void Player:: Update()
 	//重力による落下処理
 	m_vec.y += GRAVITY;
 	m_pos += m_vec;
+
 
 
 	//アニメーションの更新
@@ -215,6 +229,26 @@ void Player::Collision(Base* b)
 	case eType_Enemy1:
 		if (Base::CollisionCircle(this, b)) {
 			b->SetKill();
+			//体力を5回復(仮で25回復
+			m_hp += 25.0f;
+
+			//HPが最大値500を超えないように制限
+			if (m_hp > 500.0f) {
+				m_hp = 500.0f;
+			}
+		}
+
+
+	case eType_Enemy4:
+		if (Base::CollisionCircle(this, b)) {
+			b->SetKill();
+			//体力を25回復
+			m_hp += 25.0f;
+
+			//HPが最大値500を超えないように制限
+			if (m_hp > 500.0f) {
+				m_hp = 500.0f;
+			}
 		}
 		
 
@@ -289,15 +323,15 @@ static TexAnim _damage[] = {
 };
 
 static TexAnim _death[] = {
-	{28,4},
-	{29,4},
-	{30,4},
-	{31,4},
-	{32,4},
-	{33,4},
-	{34,4},
-	{35,4},
-	{36,4},
+	{54,4},
+	{55,4},
+	{56,4},
+	{57,4},
+	{58,4},
+	{59,4},
+	{60,4},
+	{61,4},
+	{62,4},
 };
 
 

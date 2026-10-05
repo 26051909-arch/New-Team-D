@@ -20,6 +20,8 @@ Enemy1::Enemy1(const CVector2D& pos, bool flip) : Base(eType_Enemy1)
 	//重力フラグ
 	m_grav = false;
 
+	m_death_timer = 0;
+
 	m_img.ChangeAnimation(eAnimIdle);
 
 }
@@ -59,13 +61,15 @@ void Enemy1::StateIdle()
 }
 
 
-/*void Enemy1::StateDeath()
+void Enemy1::StateDeath()
 {
-	m_img.ChangeAnimation(eAnimDeath, false);
-	if (m_img.CheckAnimationEnd()) {
+	m_death_timer++; // 毎フレーム1ずつ増やす
+
+	//12秒経過したら消滅
+	if (m_death_timer >= 720) {
 		SetKill();
 	}
-}*/
+}
 
 void Enemy1::Update()
 {
@@ -79,9 +83,9 @@ void Enemy1::Update()
 		break;
 
 		//ダウン状態
-	/*case eState_Death:
+	case eState_Death:
 		StateDeath();
-		break;*/
+		break;
 
 	}
 

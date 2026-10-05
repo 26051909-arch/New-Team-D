@@ -14,6 +14,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Title\Title.cpp" />
     <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="Game\Enemy4.cpp" />
+    <ClCompile Include="Game\Enemy2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Base.h" />
@@ -29,5 +31,7 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="Title\Title.h" />
     <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\Enemy4.h" />
+    <ClInclude Include="Game\Enemy2.h" />
   </ItemGroup>
 </Project>
