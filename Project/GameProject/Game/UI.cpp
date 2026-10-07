@@ -24,6 +24,8 @@ UI::UI() : Base(eType_UI) {
 }
 	void UI::Update() {
 		m_cnt++;
+
+		m_img_hp.UpdateAnimation();
 	}
 	
 
@@ -36,8 +38,8 @@ UI::UI() : Base(eType_UI) {
 			// ‰æ–Ê¶ã‚É”’F (R=1, G=1, B=1) ‚Å•`‰æ
 			m_font ->Draw(37, 65, 1.0f, 1.0f, 1.0f, "%d“ú–Ú", day);
 		}
-		m_img_hp.SetPos(37, 135);
-		m_img_hp.SetSize(50, 60);
-		m_img_hp.ChangeAnimation(0, false, 0);
+		m_img_hp.SetPos(67, 120);
+		m_img_hp.SetSize(115, 110);
+		m_img_hp.ChangeAnimation(0, false, 30);
 		m_img_hp.Draw();
 	}
