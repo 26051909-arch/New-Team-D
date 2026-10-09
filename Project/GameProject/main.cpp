@@ -1,6 +1,7 @@
 #include "Base/Base.h"
 #include "Game/Player.h"
 #include "Game/Enemy1.h"
+#include"Game/Enemy2.h"
 #include "Game/Enemy4.h"
 #include "Game/SpiderBullet.h"
 #include "Game/StickyWeb.h"
@@ -99,6 +100,8 @@ void Init(void)
 
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
 	ADD_RESOURCE("Enemy1", CImage::CreateImage("Image/Enemy/ƒnƒG.png", Enemy1::_anim_data, 32, 32));
+	ADD_RESOURCE("Enemy2", CImage::CreateImage("Image/Enemy/‹a.png", Enemy2::_anim_data, 32, 32));
+
 	ADD_RESOURCE("Enemy4", CImage::CreateImage("Image/Enemy/’±.png", Enemy4::_anim_data, 360, 360));
 
 

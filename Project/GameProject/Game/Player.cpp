@@ -1,5 +1,6 @@
 #include"Player.h"
 #include"Enemy1.h"
+#include"Enemy2.h"
 #include"Enemy4.h"
 #include"SpiderBullet.h"
 #include"Field.h"
@@ -229,27 +230,43 @@ void Player::Collision(Base* b)
 	case eType_Enemy1:
 		if (Base::CollisionCircle(this, b)) {
 			b->SetKill();
-			//‘Ì—Í‚ð5‰ñ•œ(‰¼‚Å25‰ñ•œ
-			m_hp += 25.0f;
+			//‘Ì—Í‚ð10‰ñ•œ
+			m_hp += 10.0f;
 
 			//HP‚ªÅ‘å’l500‚ð’´‚¦‚È‚¢‚æ‚¤‚É§ŒÀ
 			if (m_hp > 500.0f) {
 				m_hp = 500.0f;
 			}
 		}
+		break;
+
+
+	case eType_Enemy2:
+		if (Base::CollisionCircle(this, b)) {
+			b->SetKill();
+			//‘Ì—Í‚ð20‰ñ•œ
+			m_hp += 20.0f;
+
+			//HP‚ªÅ‘å’l500‚ð’´‚¦‚È‚¢‚æ‚¤‚É§ŒÀ
+			if (m_hp > 500.0f) {
+				m_hp = 500.0f;
+			}
+		}
+		break;
 
 
 	case eType_Enemy4:
 		if (Base::CollisionCircle(this, b)) {
 			b->SetKill();
-			//‘Ì—Í‚ð25‰ñ•œ
-			m_hp += 25.0f;
+			//‘Ì—Í‚ð40‰ñ•œ
+			m_hp += 40.0f;
 
 			//HP‚ªÅ‘å’l500‚ð’´‚¦‚È‚¢‚æ‚¤‚É§ŒÀ
 			if (m_hp > 500.0f) {
 				m_hp = 500.0f;
 			}
 		}
+		break;
 		
 
 	/*case eType_Tree:

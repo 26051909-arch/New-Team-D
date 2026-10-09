@@ -2,6 +2,7 @@
 #include "Field.h"
 #include "Player.h" 
 #include"Enemy1.h"
+#include"Enemy2.h"
 #include"Enemy4.h"
 #include "UI.h"
 #include "../Title/Title.h" // ゲームオーバー時にタイトルへ戻す場合
@@ -10,6 +11,7 @@ Game::Game() : Base(eType_Scene) {
 	new Field(CVector2D(0, 0));
 	new Player(CVector2D(256, 400), false);
 	new Enemy1(CVector2D(0, 540), true);
+	new Enemy2(CVector2D(1800, 400), false);
 	new Enemy4(CVector2D(0, 200), true);
 
 	
