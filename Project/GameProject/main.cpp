@@ -136,7 +136,7 @@ void Init(void)
 	ADD_RESOURCE("Back_Ground", CImage::CreateImage("Image/Field/Back_Ground.png", Field::_anim_data, 724, 543));
 	ADD_RESOURCE("UIFont", CFont::CreateInstance("UIFont", "C:\\Windows\\Fonts\\msgothic.ttc", 60));
 	ADD_RESOURCE("Title", CImage::CreateImage("Image/Title/Title.png"));
-	ADD_RESOURCE("HP", CImage::CreateImage("Image/HP/hp.png", hp_anim_data, 50, 60));
+	ADD_RESOURCE("HP", CImage::CreateImage("Image/HP/hp.png", hp_anim_data, 123.5, 110));
 	new Title();
 }
 

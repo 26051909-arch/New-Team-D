@@ -14,8 +14,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Title\Title.cpp" />
     <ClCompile Include="Game\Game.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Game\Enemy4.cpp" />
     <ClCompile Include="Game\Enemy2.cpp" />
+=======
+    <ClCompile Include="Result\Result.cpp" />
+>>>>>>> 14c9f138c1065ff476317af74dbf68f0d3d95293
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Base.h" />
@@ -31,7 +35,11 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="Title\Title.h" />
     <ClInclude Include="Game\Game.h" />
+<<<<<<< HEAD
     <ClInclude Include="Game\Enemy4.h" />
     <ClInclude Include="Game\Enemy2.h" />
+=======
+    <ClInclude Include="Result\Result.h" />
+>>>>>>> 14c9f138c1065ff476317af74dbf68f0d3d95293
   </ItemGroup>
 </Project>
