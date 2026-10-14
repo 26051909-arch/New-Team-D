@@ -4,6 +4,7 @@
 #include"Enemy1.h"
 #include"Enemy2.h"
 #include"Enemy4.h"
+#include"Enemy5.h"
 #include "UI.h"
 #include "../Title/Title.h" // ゲームオーバー時にタイトルへ戻す場合
 
@@ -13,6 +14,7 @@ Game::Game() : Base(eType_Scene) {
 	new Enemy1(CVector2D(0, 540), true);
 	new Enemy2(CVector2D(1800, 400), false);
 	new Enemy4(CVector2D(0, 200), true);
+	new Enemy5(CVector2D(2000, 400), true);
 
 	
 	m_enemy1_time = 0;

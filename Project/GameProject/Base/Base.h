@@ -11,6 +11,7 @@ enum {
     eType_Enemy1,
     eType_Enemy2,
     eType_Enemy4,
+    eType_Enemy5,
     eType_Goal,
     eType_Player_Attack,
     eType_Enemy_Attack,
