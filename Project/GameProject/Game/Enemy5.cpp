@@ -21,7 +21,7 @@ Enemy5::Enemy5(const CVector2D& pos, bool flip) : Base(eType_Enemy5)
 
 	m_death_timer = 0;
 
-	m_img.ChangeAnimation(eAnimIdle);
+	m_img.ChangeAnimation(eAnimIdle,true);
 }
 
 void Enemy5::ToDeath()
@@ -38,9 +38,21 @@ void Enemy5::StateIdle()
 {
 	//移動量
 	const float move_speed = 3;
+	const float attack_range = 140.0f; // 攻撃を開始する距離(ピクセル)
 	//移動フラグ
 	bool move_flag = true;
 
+	Base* player = Base::FindObject(eType_Player);
+	if (player != nullptr) {
+		float dist_x = fabsf(player->m_pos.x - m_pos.x);
+		float dist_y = fabsf(player->m_pos.y - m_pos.y);
+
+		if (dist_x <= attack_range && dist_y <= 100.0f) {
+			m_state = eState_Attack;
+			m_img.ChangeAnimation(eAnimAttack, false);
+			return;
+		}
+	}
 
 	if (m_flip == true) {
 		m_pos.x -= move_speed;
@@ -56,6 +68,13 @@ void Enemy5::StateIdle()
 		}
 	}
 
+}
+
+void Enemy5::StateAttack() {
+	if (m_img.CheckAnimationEnd()) {
+		m_state = eState_Idle;
+		m_img.ChangeAnimation(eAnimIdle, true);
+	}
 }
 
 void Enemy5::StateDeath()
@@ -78,6 +97,10 @@ void Enemy5::Update()
 	case eState_Idle:
 		StateIdle();
 		break;
+
+	case eState_Attack:
+			StateAttack();
+			break;
 
 		//ダウン状態
 	case eState_Death:
@@ -107,7 +130,7 @@ void Enemy5::Update()
 void Enemy5::Draw()
 {
 	m_img.SetPos(m_pos);
-
+	
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();
 
@@ -131,6 +154,14 @@ void Enemy5::Collision(Base* b)
 		}
 		break;
 
+	case eType_Player:
+		if (m_state == eState_Attack) {
+			CVector2D diff = m_pos - b->m_pos;
+			if (diff.Length() < m_rad + b->m_rad) {
+
+			}
+		}
+		break;
 	}
 }
 
@@ -142,6 +173,12 @@ static TexAnim _idle[] = {
 	{3,3},
 };
 
+static TexAnim _attack[] = { 
+	{5,4},
+	{6,4},
+	{7,4},
+	{8,4},
+};
 
 static TexAnim _death[] = {
 	{8,3},
@@ -151,5 +188,6 @@ static TexAnim _death[] = {
 
 TexAnimData Enemy5::_anim_data[] = {
 	ANIMDATA(_idle),
+	ANIMDATA(_attack),
 	ANIMDATA(_death),
 };
