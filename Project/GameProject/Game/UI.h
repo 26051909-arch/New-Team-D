@@ -11,5 +11,6 @@ public:
 	UI();
 	void Update() override;
 	void Draw() override;
+	
 };
 //extern TexAnimData hp_anim_data[];

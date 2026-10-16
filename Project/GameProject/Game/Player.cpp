@@ -5,6 +5,8 @@
 #include"Enemy4.h"
 #include"SpiderBullet.h"
 #include"Field.h"
+#include "Result/Result.h"
+
 
 
 

@@ -1,5 +1,7 @@
 #include "UI.h" 
 #include "Result/Result.h"
+#include"Player.h"
+
 /*static TexAnim _hp_anim[] = {
 	{ 0, 60 }, { 1, 60 }, { 2, 60 }, { 3, 60 }, { 4, 60 }, { 5, 60 },
 	{ 6, 60 }, { 7, 60 }, { 8, 60 }, { 9, 60 }, { 10, 60 }, { 11, 60 },
@@ -26,19 +28,21 @@ UI::UI() : Base(eType_UI) {
 	void UI::Update() {
 		m_cnt++;
 
-		/*m_img_hp.UpdateAnimation();
-		if (m_img_hp.CheckAnimationEnd()) {
-			int day = (m_cnt / 16800) + 1; // 生き延びた日数を計算 
-			Base::KillAll(); // プレイヤー・マップ・UIなどの全オブジェクトを消去 
+		//プレイヤーがいなくなったらリザルト画面へ
+		if(Base::FindObject(eType_Player) == nullptr)
+		{
+			int day = (m_cnt / 8400) + 1; // 生き延びた日数を計算 
+
+			Base::KillAll();
 			new Result(day); // 背景画像付きのリザルト画面を生成！ 
-		}*/
+		}
 	
 	}
 	
 
 	void UI::Draw() {
-		// 280秒（16,800フレーム）ごとに日数を+1計算（1日目からスタート）
-		int day = (m_cnt / 16800) + 1;
+		// 140秒（8,400フレーム）ごとに日数を+1計算（1日目からスタート）
+		int day = (m_cnt / 8400) + 1;
 
 		// 1. 日数の描画
 		if (m_font) {
