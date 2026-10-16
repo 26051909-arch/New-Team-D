@@ -1,7 +1,9 @@
 #include"Enemy5.h"
+#include "Player.h"
 #include"Field.h"
+#include "HP.h"
 
-Enemy5::Enemy5(const CVector2D& pos, bool flip) : Base(eType_Enemy5)
+Enemy5::Enemy5(const CVector2D & pos, bool flip) : Base(eType_Enemy5)
 {
 	m_img = COPY_RESOURCE("Enemy5", CImage);
 
@@ -10,18 +12,21 @@ Enemy5::Enemy5(const CVector2D& pos, bool flip) : Base(eType_Enemy5)
 	m_img.SetSize(256, 256);
 	m_img.SetCenter(128, 128);
 
+	m_hp = 50.0f;
+
 	//反転フラグ
 	m_flip = flip;
 	//通常状態へ
 	m_state = eState_Idle;
 	//着地フラグ
 	m_is_ground = true;
+	m_is_attacked = false;
 	//重力フラグ
 	m_grav = true;
 
 	m_death_timer = 0;
 
-	m_img.ChangeAnimation(eAnimIdle,true);
+	m_img.ChangeAnimation(eAnimIdle, true);
 }
 
 void Enemy5::ToDeath()
@@ -30,9 +35,39 @@ void Enemy5::ToDeath()
 		m_state = eState_Death;
 		m_grav = true;
 		m_img.ChangeAnimation(eAnimDeath); // アニメーションを繭に切り替え
+		m_img.SetSize(128, 128);
+		m_img.SetCenter(64, 64);
 	}
 }
 
+void Enemy5::TakeDamage(int damage) {
+	m_hp = (std::max)(m_hp - (float)damage, 0.0f);
+	if (m_hp <= 0) {
+		ToDeath();
+	}
+	else {
+		m_state = eState_Damage;
+		m_img.ChangeAnimation(eAnimIdle, false);
+		const float knockback_speed_x = 8.0f;
+		const float knockback_speed_y = -6.0f;
+
+		Base* player = Base::FindObject(eType_Player);
+		if (player != nullptr) {
+			if (player->m_pos.x < m_pos.x) {
+				m_vec.x = knockback_speed_x;
+			}
+			else {
+				m_vec.x = -knockback_speed_x;
+			}
+		}
+		else {
+			m_vec.x = (m_flip == true) ? -knockback_speed_x :
+				knockback_speed_y;
+		}
+		m_vec.y = knockback_speed_y;
+		m_is_ground = false;
+	}
+}
 
 void Enemy5::StateIdle()
 {
@@ -49,6 +84,7 @@ void Enemy5::StateIdle()
 
 		if (dist_x <= attack_range && dist_y <= 100.0f) {
 			m_state = eState_Attack;
+			m_is_attacked = false;
 			m_img.ChangeAnimation(eAnimAttack, false);
 			return;
 		}
@@ -68,6 +104,15 @@ void Enemy5::StateIdle()
 		}
 	}
 
+}
+
+void Enemy5::StateDamage() {
+	m_vec.x *= 100.0f;
+	if (m_img.CheckAnimationEnd() && m_is_ground) {
+		m_vec.x = 0;
+		m_state = eState_Idle;
+		m_img.ChangeAnimation(eAnimIdle, true);
+	}
 }
 
 void Enemy5::StateAttack() {
@@ -99,8 +144,8 @@ void Enemy5::Update()
 		break;
 
 	case eState_Attack:
-			StateAttack();
-			break;
+		StateAttack();
+		break;
 
 		//ダウン状態
 	case eState_Death:
@@ -130,7 +175,7 @@ void Enemy5::Update()
 void Enemy5::Draw()
 {
 	m_img.SetPos(m_pos);
-	
+
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();
 
@@ -142,22 +187,33 @@ void Enemy5::Collision(Base* b)
 	case eType_Field:
 		//Feild型へキャスト、型変換できたら
 		if (Field* f = dynamic_cast <Field*>(b)) {
-			//地面より下にいったら
-			if (m_pos.y +64 > f->GetGroundY()) {
-				//地面の高さに戻す
-				m_pos.y = f->GetGroundY() - 64;
-				//落下速度リセット
-				m_vec.y = 0;
-				//接地フラグON
-				m_is_ground = true;
+			if (m_state == eState_Death) {
+				//地面より下にいったら
+				if (m_pos.y + 64 > f->GetGroundY()) {
+					//地面の高さに戻す
+					m_pos.y = f->GetGroundY() - 64;
+					//落下速度リセット
+					m_vec.y = 0;
+					//接地フラグON
+					m_is_ground = true;
+				}
+			}
+			else {
+				if (m_pos.y + 64 > f->GetGroundY()) {
+					m_pos.y = f->GetGroundY() - 64;
+					m_vec.y = 0;
+					m_is_ground = true;
+				}
 			}
 		}
 		break;
 
-	case eType_Player:
-		if (m_state == eState_Attack) {
-			CVector2D diff = m_pos - b->m_pos;
-			if (diff.Length() < m_rad + b->m_rad) {
+	case eType_Player_Attack:
+	case eType_Bullet:
+		if (m_state != eState_Death) { // 既に死亡していない場合
+			if (Base::CollisionCircle(this, b)) {
+				TakeDamage(10);
+				b->SetKill();
 
 			}
 		}
@@ -173,11 +229,11 @@ static TexAnim _idle[] = {
 	{3,3},
 };
 
-static TexAnim _attack[] = { 
+static TexAnim _attack[] = {
+	{4,4},
 	{5,4},
 	{6,4},
 	{7,4},
-	{8,4},
 };
 
 static TexAnim _death[] = {

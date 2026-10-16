@@ -17,6 +17,7 @@ private:
 	enum {
 		eState_Idle,
 		eState_Attack, // 攻撃状態
+		eState_Damage,
 		eState_Death,
 
 	};
@@ -24,16 +25,20 @@ private:
 	//各状態での挙動
 	void StateIdle();
 	void StateAttack();
+	void StateDamage();
 	void StateDeath();
 
 	//状態変数
 	int m_state;
+	float m_hp;
 	//死亡状態でのタイマー
 	int m_death_timer;
 	//反転フラグ
 	bool m_flip;
 	//着地フラグ
 	bool m_is_ground;
+
+	bool m_is_attacked;
 	//重力フラグ
 	int m_grav;
 	CImage m_img;
@@ -41,6 +46,7 @@ private:
 public:
 	Enemy5(const CVector2D& pos, bool flip);
 	void ToDeath();
+	void TakeDamage(int damage);
 	void Update();
 	void Draw();
 	void Collision(Base* b);

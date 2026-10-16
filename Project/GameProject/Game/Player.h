@@ -52,5 +52,10 @@ public:
 	float GetHP() {
 		return m_hp;
 	}
+	void TakeDamage(int Damage) {
+		m_hp -= Damage;
+		if (m_hp < 0)
+			m_hp = 0;
+	}
 
 };
