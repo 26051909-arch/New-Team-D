@@ -9,18 +9,21 @@ private:
 	//アニメーションの種類
 	enum {
 		eAnimIdle = 0,
+		eAnimAttack, // 攻撃 (コマ 5〜8)
 		eAnimDeath,
 	};
 
 	//状態
 	enum {
 		eState_Idle,
+		eState_Attack, // 攻撃状態
 		eState_Death,
 
 	};
 
 	//各状態での挙動
 	void StateIdle();
+	void StateAttack();
 	void StateDeath();
 
 	//状態変数
