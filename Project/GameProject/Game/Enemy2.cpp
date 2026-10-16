@@ -1,4 +1,5 @@
 #include"Enemy2.h"
+#include"Enemy3.h"
 #include"Effect.h"
 #include"Field.h"
 
@@ -11,8 +12,6 @@ Enemy2::Enemy2(const CVector2D& pos, bool flip) : Base(eType_Enemy2)
 	m_img.SetSize(120, 120);
 	m_img.SetCenter(60, 90);
 
-
-	//体力の初期化(最大500)
 	m_hp = 20.0f;
 	//反転フラグ
 	m_flip = flip;
@@ -61,7 +60,11 @@ void Enemy2::StateIdle()
 
 void Enemy2::StateDamage()
 {
+	//空気抵抗や地面との摩擦のイメージで、徐々に横移動の速度を落とす
+	m_vec.x *= 0.5f;
+
 	if (m_img.CheckAnimationEnd()) {
+		m_vec.x = 0; //通常状態に戻る時に横の移動速度を完全にリセット
 		m_state = eState_Idle;
 		m_img.ChangeAnimation(eAnimIdle, true);
 	}
@@ -144,7 +147,40 @@ void Enemy2::Collision(Base* b)
 		}
 		break;
 
+
+	case eType_Enemy3:
+		if (Base::CollisionCircle(this, b)) {
+			if (Enemy3* enemy3 = dynamic_cast<Enemy3*>(b)) {
+				
+				if (enemy3->m_state != eState_Death) {
+
+					//コガネムシが通常状態の際は蟻がダメージを食らう
+					m_hp -= 12.0f;
+					m_state = eState_Damage;
+					m_img.ChangeAnimation(eAnimDamage, false);
+
+					// ノックバック処理
+					float knockback_x = 12.0f;  // 後ろに吹き飛ぶ強さ
+					float knockback_y = -13.0f; // 上に少し跳ね上がる強さ（マイナスが上方向）
+
+					if (m_flip == true) {
+						// 蟻が右を向いていたなら、左（マイナス方向）へ吹き飛ばす
+						m_vec.x = -knockback_x;
+					}
+					else {
+						// 蟻が左を向いていたなら、右（プラス方向）へ吹き飛ばす
+						m_vec.x = knockback_x;
+					}
+					// 上方向に跳ね上がらせる
+					m_vec.y = knockback_y;
+					m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
+				}
+			}
+		}
+		break;
+
 	}
+
 }
 
 void Enemy2::TakeDamage(int damage)

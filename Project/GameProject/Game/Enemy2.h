@@ -27,8 +27,7 @@ private:
 	void StateDeath();
 
 
-	//状態変数
-	int m_state;
+
 	//死亡状態でのタイマー
 	int m_death_timer;
 	//反転フラグ
@@ -49,5 +48,8 @@ public:
 	void TakeDamage(int damage);
 
 	static TexAnimData _anim_data[];
+
+	//状態変数
+	int m_state;
 
 };

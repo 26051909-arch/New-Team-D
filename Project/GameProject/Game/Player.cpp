@@ -1,11 +1,10 @@
 #include"Player.h"
 #include"Enemy1.h"
 #include"Enemy2.h"
+#include"Enemy3.h"
 #include"Enemy4.h"
 #include"SpiderBullet.h"
 #include"Field.h"
-#include"Tree.h"
-#include"Tree2.h"
 
 
 
@@ -131,7 +130,14 @@ void Player::StateIdle()
 
 void Player::StateDamage()
 {
+	//空気抵抗や地面との摩擦のイメージで、徐々に横移動の速度を落とす
+	m_vec.x *= 0.5f;
 
+	if (m_img.CheckAnimationEnd()) {
+		m_vec.x = 0; //通常状態に戻る時に横の移動速度を完全にリセット
+		m_state = eState_Idle;
+		m_img.ChangeAnimation(eAnimIdle, true);
+	}
 }
 
 void Player::StateDeath()
@@ -151,7 +157,7 @@ void Player:: Update()
 
 	//一秒につき１０ずつ体力が下がる
 	if (m_state != eState_Death) {
-		m_hp -= (10.0f / 60.0f);
+		m_hp -= (5.0f / 60.0f);
 
 		if (m_hp <= 0.0f) {
 			m_hp = 0.0f;
@@ -167,7 +173,7 @@ void Player:: Update()
 		break;
 
 		//ダメージ状態
-	case eStateDamage:
+	case eState_Damage:
 		StateDamage();
 		break;
 
@@ -243,13 +249,85 @@ void Player::Collision(Base* b)
 
 	case eType_Enemy2:
 		if (Base::CollisionCircle(this, b)) {
-			b->SetKill();
-			//体力を20回復
-			m_hp += 20.0f;
+			if (Enemy2* enemy2 = dynamic_cast<Enemy2*>(b)) {
+				//敵2の状態が「死亡状態（繭）」のときだけ中を実行する
+				if (enemy2->m_state == eState_Death) {
+					enemy2->SetKill();
 
-			//HPが最大値500を超えないように制限
-			if (m_hp > 500.0f) {
-				m_hp = 500.0f;
+					// 体力を20回復
+					m_hp += 20.0f;
+
+					// HPが最大値500を超えないように制限
+					if (m_hp > 500.0f) {
+						m_hp = 500.0f;
+					}
+				}
+				else {
+					
+					//敵が通常状態の際はプレイヤーがダメージを食らう
+					m_hp -= 2.0f;
+					m_state = eState_Damage;
+					m_img.ChangeAnimation(eAnimDamage, false);
+
+					// ノックバック処理
+					float knockback_x = 13.0f;  // 後ろに吹き飛ぶ強さ
+					float knockback_y = -10.0f; // 上に少し跳ね上がる強さ（マイナスが上方向）
+
+					if (m_flip == true) {
+						// プレイヤーが右を向いていたなら、左（マイナス方向）へ吹き飛ばす
+						m_vec.x = -knockback_x;
+					}
+					else {
+						// プレイヤーが左を向いていたなら、右（プラス方向）へ吹き飛ばす
+						m_vec.x = knockback_x;
+					}
+					// 上方向に跳ね上がらせる
+					m_vec.y = knockback_y;
+					m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
+				}
+			}
+		}
+		break;
+
+
+	case eType_Enemy3:
+		if (Base::CollisionCircle(this, b)) {
+			if (Enemy3* enemy3 = dynamic_cast<Enemy3*>(b)) {
+				//敵2の状態が「死亡状態（繭）」のときだけ中を実行する
+				if (enemy3->m_state == eState_Death) {
+					enemy3->SetKill();
+
+					// 体力を30回復
+					m_hp += 30.0f;
+
+					// HPが最大値500を超えないように制限
+					if (m_hp > 500.0f) {
+						m_hp = 500.0f;
+					}
+				}
+				else {
+
+					//敵が通常状態の際はプレイヤーがダメージを食らう
+					m_hp -= 6.0f;
+					m_state = eState_Damage;
+					m_img.ChangeAnimation(eAnimDamage, false);
+
+					// ノックバック処理
+					float knockback_x = 16.0f;  // 後ろに吹き飛ぶ強さ
+					float knockback_y = -13.0f; // 上に少し跳ね上がる強さ（マイナスが上方向）
+
+					if (m_flip == true) {
+						// プレイヤーが右を向いていたなら、左（マイナス方向）へ吹き飛ばす
+						m_vec.x = -knockback_x;
+					}
+					else {
+						// プレイヤーが左を向いていたなら、右（プラス方向）へ吹き飛ばす
+						m_vec.x = knockback_x;
+					}
+					// 上方向に跳ね上がらせる
+					m_vec.y = knockback_y;
+					m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
+				}
 			}
 		}
 		break;
@@ -334,9 +412,9 @@ static TexAnim _shootweb[] = {
 };
 
 static TexAnim _damage[] = {
-	{25,4},
-	{26,4},
-	{27,4},
+	{45,3},
+	{46,3},
+	{47,3},
 };
 
 static TexAnim _death[] = {

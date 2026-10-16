@@ -2,14 +2,13 @@
 #include "Game/Player.h"
 #include "Game/Enemy1.h"
 #include"Game/Enemy2.h"
+#include"Game/Enemy3.h"
 #include "Game/Enemy4.h"
 #include "Game/SpiderBullet.h"
-#include "Game/StickyWeb.h"
 #include "Game/Effect.h"
 #include "Game/Field.h"
-#include "Game/Tree.h"
-#include "Game/Tree2.h"
 #include "Game/UI.h"
+#include"Game/Hp.h"
 #include "Title/Title.h"
 
 void MainLoop(void) {
@@ -101,18 +100,20 @@ void Init(void)
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/Spider Sprite Sheet.png", Player::_anim_data, 32, 32));
 	ADD_RESOURCE("Enemy1", CImage::CreateImage("Image/Enemy/ハエ.png", Enemy1::_anim_data, 32, 32));
 	ADD_RESOURCE("Enemy2", CImage::CreateImage("Image/Enemy/蟻.png", Enemy2::_anim_data, 32, 32));
+	ADD_RESOURCE("Enemy3", CImage::CreateImage("Image/Enemy/コガネムシ.png", Enemy3::_anim_data, 32, 32));
+
 
 	ADD_RESOURCE("Enemy4", CImage::CreateImage("Image/Enemy/蝶.png", Enemy4::_anim_data, 360, 360));
 
 
 	ADD_RESOURCE("Effect", CImage::CreateImage("Image/Player/web.png", Player::_anim_data, 1024, 1024));
-	ADD_RESOURCE("StickyWeb", CImage::CreateImage("Image/Player/stickyweb.png"));
+	
+	
 
 
 	ADD_RESOURCE("ForeGround", CImage::CreateImage("Image/ground/ground.png"));
 	ADD_RESOURCE("Mount", CImage::CreateImage("Image/ground/Grass Mountains.png"));
-	ADD_RESOURCE("Tree", CImage::CreateImage("Image/ground/tree.png"));
-	ADD_RESOURCE("Tree2", CImage::CreateImage("Image/ground/tree2.png"));
+	
 
 
 
@@ -136,7 +137,7 @@ void Init(void)
 	ADD_RESOURCE("Back_Ground", CImage::CreateImage("Image/Field/Back_Ground.png", Field::_anim_data, 724, 543));
 	ADD_RESOURCE("UIFont", CFont::CreateInstance("UIFont", "C:\\Windows\\Fonts\\msgothic.ttc", 60));
 	ADD_RESOURCE("Title", CImage::CreateImage("Image/Title/Title.png"));
-	ADD_RESOURCE("HP", CImage::CreateImage("Image/HP/hp.png", hp_anim_data, 123.5, 110));
+	//ADD_RESOURCE("HP", CImage::CreateImage("Image/HP/hp.png", hp_anim_data, 123.5, 110));
 	ADD_RESOURCE("GameOver", CImage::CreateImage("Image/Result/GameOver.png"));
 	new Title();
 }

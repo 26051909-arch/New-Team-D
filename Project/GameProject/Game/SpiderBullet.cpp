@@ -2,9 +2,8 @@
 #include"Player.h"
 #include"Enemy1.h"
 #include"Enemy2.h"
+#include"Enemy3.h"
 #include"Enemy4.h"
-#include"Tree.h"
-#include"Tree2.h"
 #include"Effect.h"
 
 SpiderBullet::SpiderBullet(const CVector2D& pos, float houkou) : Base(eType_Bullet)
@@ -82,15 +81,26 @@ void SpiderBullet::Collision(Base* b)
 		if (Base::CollisionCircle(this, b))
 		{
 			Enemy2* enemy = (Enemy2*)b;
-			//enemy->ToDeath();
 			enemy->TakeDamage(10.0f);
 
 
 			// 弾自身は消滅させる
 			SetKill();
 
-			// 必要であればエフェクトを出す
-			//new Effect(m_pos);
+
+
+		}
+		break;
+
+	case eType_Enemy3:
+		if (Base::CollisionCircle(this, b))
+		{
+			Enemy3* enemy = (Enemy3*)b;
+			enemy->TakeDamage(10.0f);
+
+
+			// 弾自身は消滅させる
+			SetKill();
 
 
 

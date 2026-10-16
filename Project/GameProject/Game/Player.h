@@ -18,7 +18,7 @@ private:
 	//ó‘Ô
 	enum {
 		eState_Idle,
-		eStateDamage,
+		eState_Damage,
 		eState_Death,
 
 	};
@@ -49,5 +49,8 @@ public:
 	void Collision(Base* b);
 
 	static TexAnimData _anim_data[];
+	float GetHP() {
+		return m_hp;
+	}
 
 };

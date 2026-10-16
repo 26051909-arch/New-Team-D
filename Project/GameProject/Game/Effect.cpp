@@ -1,5 +1,4 @@
 #include"Effect.h"
-#include"StickyWeb.h"
 
 
 Effect::Effect(const CVector2D& pos) : Base(eType_Effect)

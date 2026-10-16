@@ -10,6 +10,7 @@ enum {
     eType_Bullet,
     eType_Enemy1,
     eType_Enemy2,
+    eType_Enemy3,
     eType_Enemy4,
     eType_Goal,
     eType_Player_Attack,
@@ -17,6 +18,7 @@ enum {
     eType_Effect,
     eType_StickyWeb,
     eType_UI,
+    eType_Hp,
     eType_Scene,
 };
 

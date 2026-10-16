@@ -1,6 +1,6 @@
 #include "UI.h" 
 #include "Result/Result.h"
-static TexAnim _hp_anim[] = {
+/*static TexAnim _hp_anim[] = {
 	{ 0, 60 }, { 1, 60 }, { 2, 60 }, { 3, 60 }, { 4, 60 }, { 5, 60 },
 	{ 6, 60 }, { 7, 60 }, { 8, 60 }, { 9, 60 }, { 10, 60 }, { 11, 60 },
 	{ 12, 60 }, { 13, 60 }, { 14, 60 }, { 15, 60 }, { 16, 60 }, { 17, 60 },
@@ -13,12 +13,12 @@ static TexAnim _hp_anim[] = {
 };
 TexAnimData hp_anim_data[] = {
 	ANIMDATA(_hp_anim),
-};
+};*/
 
 UI::UI() : Base(eType_UI) {
 	// 登録したフォントリソースを取得
 	m_font = GET_RESOURCE("UIFont", CFont);
-	m_img_hp = COPY_RESOURCE("HP", CImage);
+	//m_img_hp = COPY_RESOURCE("HP", CImage);
 
 	m_cnt = 0;
 
@@ -26,12 +26,12 @@ UI::UI() : Base(eType_UI) {
 	void UI::Update() {
 		m_cnt++;
 
-		m_img_hp.UpdateAnimation();
+		/*m_img_hp.UpdateAnimation();
 		if (m_img_hp.CheckAnimationEnd()) {
 			int day = (m_cnt / 16800) + 1; // 生き延びた日数を計算 
 			Base::KillAll(); // プレイヤー・マップ・UIなどの全オブジェクトを消去 
 			new Result(day); // 背景画像付きのリザルト画面を生成！ 
-		} 
+		}*/
 	
 	}
 	
@@ -43,10 +43,10 @@ UI::UI() : Base(eType_UI) {
 		// 1. 日数の描画
 		if (m_font) {
 			// 画面左上に白色 (R=1, G=1, B=1) で描画
-			m_font ->Draw(37, 65, 1.0f, 1.0f, 1.0f, "%d日目", day);
+			m_font ->Draw(37, 190, 1.0f, 1.0f, 1.0f, "%d日目", day);
 		}
-		m_img_hp.SetPos(67, 120);
+		/*m_img_hp.SetPos(67, 120);
 		m_img_hp.SetSize(115, 110);
 		m_img_hp.ChangeAnimation(0, false, 30);
-		m_img_hp.Draw();
+		m_img_hp.Draw();*/
 	}
