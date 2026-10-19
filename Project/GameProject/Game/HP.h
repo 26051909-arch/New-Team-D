@@ -5,7 +5,7 @@
 class Hp : public Base {
 private:
 	CFont* m_font; // フォント用ポインタ
-
+	
 public:
 	Hp();
 	void Update();
