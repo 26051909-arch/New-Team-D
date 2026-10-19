@@ -6,6 +6,7 @@
 #include"Enemy3.h"
 #include"Enemy4.h"
 #include"Enemy5.h"
+#include"Enemy6.h"
 #include "UI.h"
 #include"Hp.h"
 #include "../Title/Title.h" // ゲームオーバー時にタイトルへ戻す場合
@@ -18,6 +19,7 @@ Game::Game() : Base(eType_Scene) {
 	//new Enemy3(CVector2D(1800, 805), false);
 	new Enemy4(CVector2D(0, 200), true);
 	new Enemy5(CVector2D(2000, 400), true);
+	new Enemy6(CVector2D(2000, 600), false);
 
 	
 	m_enemy1_time = 0;
@@ -96,11 +98,11 @@ void Game::Update() {
 	}
 
 
-	// Enemy3：昼・夕方に出現（10秒に1回）
+	// Enemy3：昼・夕方に出現（7秒に1回）
 	if (is_noon || is_evening) {
 		m_enemy3_time++;
 
-		if (m_enemy3_time >= 600) {
+		if (m_enemy3_time >= 420) {
 			if (rand() % 2 == 0) {
 				new Enemy3(CVector2D(0, 805), true);
 			}

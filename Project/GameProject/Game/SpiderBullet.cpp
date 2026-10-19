@@ -49,15 +49,6 @@ void SpiderBullet::Draw()
 void SpiderBullet::Collision(Base* b)
 {
 	switch (b->GetType()) {
-	/*case eType_Tree2:
-		if (Base::CollisionRect(this, b))
-		{
-			new Effect(m_pos);
-
-			SetKill();
-		}
-		break;*/
-
 
 	case eType_Enemy1:
 		if (Base::CollisionCircle(this, b))

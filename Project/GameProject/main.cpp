@@ -5,8 +5,11 @@
 #include"Game/Enemy3.h"
 #include "Game/Enemy4.h"
 #include "Game/Enemy5.h"
+#include"Game/Enemy6.h"
 #include "Game/SpiderBullet.h"
+#include"Game/BigBullet.h"
 #include "Game/Effect.h"
+#include"Game/Effect2.h"
 #include "Game/Field.h"
 #include "Game/UI.h"
 #include"Game/Hp.h"
@@ -105,10 +108,12 @@ void Init(void)
 
 
 	ADD_RESOURCE("Enemy4", CImage::CreateImage("Image/Enemy/í±.png", Enemy4::_anim_data, 360, 360));
+	ADD_RESOURCE("Enemy6", CImage::CreateImage("Image/Enemy/ãêëÂÉNÉÇ.png", Enemy6::_anim_data, 32, 32));
 
 
 	ADD_RESOURCE("Effect", CImage::CreateImage("Image/Player/web.png", Player::_anim_data, 1024, 1024));
-	
+	ADD_RESOURCE("Effect2", CImage::CreateImage("Image/Enemy/Retro Impact Effect Pack 3 B.png", Effect2::_anim_data, 32, 32));
+
 	
 
 
@@ -120,6 +125,7 @@ void Init(void)
 
 
 	ADD_RESOURCE("SpiderBullet", CImage::CreateImage("Image/Player/SpiderBullet.png"));
+	ADD_RESOURCE("BigBullet", CImage::CreateImage("Image/Enemy/ÉfÉJÇ¢SpiderBullet.png"));
 
 
 

@@ -40,7 +40,7 @@ private:
 	int m_turn_count = 0;
 
 	// •ûŒü“]Š·‚Å‚«‚éÅ‘å‰ñ”
-	const int m_max_turn_count = 3;
+	int m_max_turn_count;
 	CImage m_img;
 
 public:

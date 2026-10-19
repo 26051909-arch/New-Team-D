@@ -16,6 +16,10 @@
     <ClCompile Include="Title\Title.cpp" />
     <ClCompile Include="Game\Enemy3.cpp" />
     <ClCompile Include="Game\HP.cpp" />
+    <ClCompile Include="Game\Enemy5.cpp" />
+    <ClCompile Include="Game\Enemy6.cpp" />
+    <ClCompile Include="Game\BigBullet.cpp" />
+    <ClCompile Include="Game\Effect2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Base.h" />
@@ -33,5 +37,9 @@
     <ClInclude Include="Title\Title.h" />
     <ClInclude Include="Game\Enemy3.h" />
     <ClInclude Include="Game\HP.h" />
+    <ClInclude Include="Game\Enemy5.h" />
+    <ClInclude Include="Game\Enemy6.h" />
+    <ClInclude Include="Game\BigBullet.h" />
+    <ClInclude Include="Game\Effect2.h" />
   </ItemGroup>
 </Project>
