@@ -3,7 +3,9 @@
 #include"Enemy2.h"
 #include"Enemy3.h"
 #include"Enemy4.h"
+#include"Enemy5.h"
 #include"SpiderBullet.h"
+#include"Effect2.h"
 #include"Field.h"
 #include "Result/Result.h"
 
@@ -39,7 +41,7 @@ void Player::StateIdle()
 	//移動フラグ
 	bool move_flag = false;
 	//ジャンプ力
-	const float jump_pow = 14;
+	const float jump_pow = 12;
 
 	//右移動
 	if (HOLD(CInput::eRight)) {
@@ -216,7 +218,7 @@ void Player::Draw()
 
 
 
-void Player::Collision(Base* b) 
+void Player::Collision(Base* b)
 {
 	switch (b->m_type) {
 	case eType_Field:
@@ -265,7 +267,7 @@ void Player::Collision(Base* b)
 					}
 				}
 				else {
-					
+
 					//敵が通常状態の際はプレイヤーがダメージを食らう
 					m_hp -= 2.0f;
 					m_state = eState_Damage;
@@ -347,23 +349,91 @@ void Player::Collision(Base* b)
 			}
 		}
 		break;
-		
 
-	/*case eType_Tree:
-		if (Tree* t = dynamic_cast<Tree*>(b)) {
-			// 枝の範囲内にいるか
-			bool inXRange = (m_pos.x > t->m_pos.x - 680 && m_pos.x < t->m_pos.x + 680);
-			bool aboveBranch = (m_pos_old.y <= t->GetGroundY()); // 前フレームで枝より上にいたか
-			bool falling = (m_vec.y > 0); // 下方向に移動しているか
 
-			// 枝の上から落ちてきた場合のみ乗る
-			if (inXRange && falling && aboveBranch && m_pos.y > t->GetGroundY()) {
-				m_pos.y = t->GetGroundY();
-				m_vec.y = 0;
-				m_is_ground = true;
+	case eType_Enemy5:
+		if (Enemy5* enemy5 = dynamic_cast<Enemy5*>(b)) {
+			if (Base::CollisionCircle(this, b)) {
+				//敵5の状態が「死亡状態（繭）」のときだけ中を実行する
+				if (enemy5->m_state == Enemy5::eState_Death) {
+					enemy5->SetKill();
+
+					// 体力を30回復
+					m_hp += 50.0f;
+
+					// HPが最大値500を超えないように制限
+					if (m_hp > 500.0f) {
+						m_hp = 500.0f;
+					}
+				}
+				else if (enemy5->m_state == Enemy5::eState_Idle ||
+					enemy5->m_state == Enemy5::eState_Attack) {
+
+					//敵が通常状態の際はプレイヤーがダメージを食らう
+					m_hp -= 10.0f;
+					m_state = eState_Damage;
+					m_img.ChangeAnimation(eAnimDamage, false);
+
+					// ノックバック処理
+					float knockback_x = 18.0f;  // 後ろに吹き飛ぶ強さ
+					float knockback_y = -15.0f; // 上に少し跳ね上がる強さ（マイナスが上方向）
+
+					if (m_flip == true) {
+						// プレイヤーが右を向いていたなら、左（マイナス方向）へ吹き飛ばす
+						m_vec.x = -knockback_x;
+					}
+					else {
+						// プレイヤーが左を向いていたなら、右（プラス方向）へ吹き飛ばす
+						m_vec.x = knockback_x;
+					}
+					// 上方向に跳ね上がらせる
+					m_vec.y = knockback_y;
+					m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
+				}
 			}
 		}
-		break;*/
+		break;
+
+
+	case eType_Effect2:
+		if (Effect2* effect = dynamic_cast<Effect2*>(b)) {
+			if (effect->HitTest(m_pos, m_rad)) {
+
+				// ダメージ
+				m_hp -= 20.0f;
+
+				if (m_hp < 0.0f) {
+					m_hp = 0.0f;
+				}
+
+				// ダメージアニメーション
+				m_state = eState_Damage;
+				m_img.ChangeAnimation(eAnimDamage, false);
+
+				// ノックバック
+				const float knockback_x = 14.0f;
+				const float knockback_y = -13.0f;
+
+				// 衝撃波がプレイヤーの左側なら右へ、
+				// 右側なら左へ吹き飛ばす
+				if (m_pos.x < effect->m_pos_left.x) {
+					m_vec.x = -knockback_x;
+				}
+				else if (m_pos.x > effect->m_pos_right.x) {
+					m_vec.x = knockback_x;
+				}
+				else {
+					// どちらか判断しにくい場合
+					m_vec.x = (m_pos.x < effect->m_pos.x)
+						? -knockback_x : knockback_x;
+				}
+
+				m_vec.y = knockback_y;
+				m_is_ground = false;
+			}
+		}
+		break;
+
 
 	}
 }

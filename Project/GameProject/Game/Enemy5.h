@@ -4,7 +4,7 @@
 
 class Enemy5 : public Base
 {
-private:
+public:
 
 	//アニメーションの種類
 	enum {
@@ -28,8 +28,7 @@ private:
 	void StateDamage();
 	void StateDeath();
 
-	//状態変数
-	int m_state;
+	
 	float m_hp;
 	//死亡状態でのタイマー
 	int m_death_timer;
@@ -52,4 +51,7 @@ public:
 	void Collision(Base* b);
 
 	static TexAnimData _anim_data[];
+
+	//状態変数
+	int m_state;
 };

@@ -7,6 +7,8 @@ class BigBullet : public Base
 public:
 	CImage m_img;
 	int m_dir = 1;	//1=右、 -1=左
+	//体力
+	float m_hp;
 	float m_houkou;
 
 public:
@@ -14,4 +16,6 @@ public:
 	void Update();
 	void Draw();
 	void Collision(Base* b);
+	//ダメージ受ける
+	void TakeDamage(int damage);
 };

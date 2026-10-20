@@ -13,10 +13,12 @@ BigBullet::BigBullet(const CVector2D& pos, float houkou) : Base(eType_BigBullet)
 	m_houkou = houkou;
 
 	//半径
-	m_rad = 250;
+	m_rad = 200;
 
-	m_img.SetSize(500, 500);
-	m_img.SetCenter(250, 250);
+	m_img.SetSize(400, 400);
+	m_img.SetCenter(200, 200);
+
+	m_hp = 50.0f;
 }
 
 
@@ -29,7 +31,7 @@ void BigBullet::Update()
 		m_pos.x += move_speed * m_dir;
 	}
 	else {
-		m_pos.y += -move_speed;
+		m_pos.x += move_speed;
 	}
 
 
@@ -43,6 +45,15 @@ void BigBullet::Update()
 void BigBullet::Draw()
 {
 	m_img.SetPos(m_pos);
+
+	// 右向きなら反転、左向きならそのまま
+	if (m_dir == 1) {
+		m_img.SetFlipH(true);
+	}
+	else {
+		m_img.SetFlipH(false);
+	}
+
 	m_img.Draw();
 }
 
@@ -58,7 +69,7 @@ void BigBullet::Collision(Base* b)
 			enemy->ToDeath();
 
 			// 必要であればエフェクトを出す
-			new Effect(m_pos);
+			//new Effect(m_pos);
 
 		}
 		break;
@@ -90,10 +101,19 @@ void BigBullet::Collision(Base* b)
 			enemy->ToDeath();
 
 			// 必要であればエフェクトを出す
-			new Effect(m_pos);
+			//new Effect(m_pos);
 
 		}
 		break;
 	}
 
+}
+
+void BigBullet::TakeDamage(int damage)
+{
+	//HP減少　　下限0
+	m_hp = max(m_hp - damage, 0);
+	if (m_hp <= 0) {
+		SetKill();
+	}
 }

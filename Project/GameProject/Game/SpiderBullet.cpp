@@ -4,6 +4,9 @@
 #include"Enemy2.h"
 #include"Enemy3.h"
 #include"Enemy4.h"
+#include"Enemy5.h"
+#include"Enemy6.h"
+#include"BigBullet.h"
 #include"Effect.h"
 
 SpiderBullet::SpiderBullet(const CVector2D& pos, float houkou) : Base(eType_Bullet)
@@ -115,6 +118,53 @@ void SpiderBullet::Collision(Base* b)
 
 		}
 		break;
+
+	case eType_Enemy5:
+		if (Base::CollisionCircle(this, b))
+		{
+			Enemy5* enemy = (Enemy5*)b;
+			enemy->TakeDamage(10.0f);
+
+
+			// ’e©g‚ÍÁ–Å‚³‚¹‚é
+			SetKill();
+
+
+
+		}
+		break;
+
+	case eType_Enemy6:
+		if (Base::CollisionCircle(this, b))
+		{
+			Enemy6* enemy = (Enemy6*)b;
+			enemy->TakeDamage(10.0f);
+
+
+			// ’e©g‚ÍÁ–Å‚³‚¹‚é
+			SetKill();
+
+
+
+		}
+		break;
+
+	case eType_BigBullet:
+		if (Base::CollisionCircle(this, b))
+		{
+			BigBullet* enemy = (BigBullet*)b;
+			enemy->TakeDamage(10.0f);
+
+
+			// ’e©g‚ÍÁ–Å‚³‚¹‚é
+			SetKill();
+
+
+
+		}
+		break;
+
+
 	}
 
 }

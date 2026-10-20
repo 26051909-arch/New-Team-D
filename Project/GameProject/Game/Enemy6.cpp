@@ -1,5 +1,6 @@
 #include"Enemy6.h"
 #include"BigBullet.h"
+#include"Effect2.h"
 #include"Field.h"
 
 
@@ -8,12 +9,12 @@ Enemy6::Enemy6(const CVector2D& pos, bool flip) : Base(eType_Enemy6)
 	m_img = COPY_RESOURCE("Enemy6", CImage);
 
 	m_pos = pos;
-	//m_rad = 480;
+	m_rad = 240;
 	m_img.SetSize(960, 960);
 	m_img.SetCenter(480, 930);
 
 
-	m_hp = 100.0f;
+	m_hp = 300.0f;
 	//反転フラグ
 	m_flip = flip;
 	//通常状態へ
@@ -38,7 +39,7 @@ void Enemy6::StateIdle()
 	const float move_speed = 5.0f;
 
 	//プレイヤーとの停止する距離
-	const float stop_distance = 1000.0f;
+	const float stop_distance = 1100.0f;
 
 	//移動フラグ
 	bool move_flag = false;
@@ -112,8 +113,8 @@ void Enemy6::StateIdle()
 			}
 
 
-			//5秒経過したら行動
-			if (m_shot_timer >= 300 && !m_is_action) {
+			//4秒経過したら行動
+			if (m_shot_timer >= 240 && !m_is_action) {
 
 				//タイマーリセット
 				m_shot_timer = 0;
@@ -151,7 +152,7 @@ void Enemy6::StateIdle()
 						bulletPos.x = m_pos.x + 370;	//プレイヤーの右端
 						bulletPos.y = m_pos.y - 100;		//プレイヤーの胸辺り
 
-						BigBullet* b = new BigBullet(bulletPos, 2);
+						BigBullet* b = new BigBullet(bulletPos, 3);
 						b->m_dir = 1;
 					}
 
@@ -236,6 +237,13 @@ void Enemy6::Collision(Base* b)
 		if (Field* f = dynamic_cast <Field*>(b)) {
 			//地面より下にいったら
 			if (m_pos.y > f->GetGroundY()) {
+
+				// 着地した瞬間だけ衝撃波を生成
+				if (!m_is_ground && m_vec.y > 0) {
+
+					new Effect2(m_pos, m_flip);
+				}
+
 				//地面の高さに戻す
 				m_pos.y = f->GetGroundY();
 				//落下速度リセット

@@ -1,5 +1,6 @@
 #include"Enemy5.h"
 #include "Player.h"
+#include"Effect.h"
 #include"Field.h"
 #include "HP.h"
 
@@ -8,9 +9,13 @@ Enemy5::Enemy5(const CVector2D & pos, bool flip) : Base(eType_Enemy5)
 	m_img = COPY_RESOURCE("Enemy5", CImage);
 
 	m_pos = pos;
-	m_rad = 64;
+	/*m_rad = 40;
 	m_img.SetSize(256, 256);
-	m_img.SetCenter(128, 128);
+	m_img.SetCenter(128, 226);*/
+	m_rad = 40;
+	m_img.SetSize(240, 240);
+	m_img.SetCenter(120, 180);
+
 
 	m_hp = 50.0f;
 
@@ -33,39 +38,37 @@ void Enemy5::ToDeath()
 {
 	if (m_state != eState_Death) {
 		m_state = eState_Death;
-		m_grav = true;
+		//m_grav = true;
+		new Effect(m_pos);
 		m_img.ChangeAnimation(eAnimDeath); // アニメーションを繭に切り替え
-		m_img.SetSize(128, 128);
-		m_img.SetCenter(64, 64);
 	}
+	
 }
 
 void Enemy5::TakeDamage(int damage) {
-	m_hp = (std::max)(m_hp - (float)damage, 0.0f);
+
+	//HP減少　　下限0
+	m_hp = max(m_hp - damage, 0);
 	if (m_hp <= 0) {
 		ToDeath();
 	}
-	else {
+	else{
 		m_state = eState_Damage;
 		m_img.ChangeAnimation(eAnimIdle, false);
-		const float knockback_speed_x = 8.0f;
-		const float knockback_speed_y = -6.0f;
+		const float knockback_x = 9.0f;	// 後ろに吹き飛ぶ強さ
+		const float knockback_y = -8.0f;	// 上に少し跳ね上がる強さ（マイナスが上方向）
 
-		Base* player = Base::FindObject(eType_Player);
-		if (player != nullptr) {
-			if (player->m_pos.x < m_pos.x) {
-				m_vec.x = knockback_speed_x;
-			}
-			else {
-				m_vec.x = -knockback_speed_x;
-			}
+		if (m_flip == true) {
+			// プレイヤーが左を向いていたなら、右へ吹き飛ばす
+			m_vec.x = knockback_x;
 		}
 		else {
-			m_vec.x = (m_flip == true) ? -knockback_speed_x :
-				knockback_speed_y;
+			// プレイヤーが右を向いていたなら、左へ吹き飛ばす
+			m_vec.x = -knockback_x;
 		}
-		m_vec.y = knockback_speed_y;
-		m_is_ground = false;
+		// 上方向に跳ね上がらせる
+		m_vec.y = knockback_y;
+		m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
 	}
 }
 
@@ -90,16 +93,16 @@ void Enemy5::StateIdle()
 		}
 	}
 
-	if (m_flip == true) {
-		m_pos.x -= move_speed;
-		if (m_pos.x > SCREEN_WIDTH + 170) {
+	if (m_flip == false) {
+		m_pos.x += move_speed;
+		if (m_pos.x > SCREEN_WIDTH + 250) {
 			SetKill();
 
 		}
 	}
 	else {
 		m_pos.x -= move_speed;
-		if (m_pos.x < -170) {
+		if (m_pos.x < -250) {
 			SetKill();
 		}
 	}
@@ -107,11 +110,11 @@ void Enemy5::StateIdle()
 }
 
 void Enemy5::StateDamage() {
-	m_vec.x *= 100.0f;
-	if (m_img.CheckAnimationEnd() && m_is_ground) {
+	m_vec.x *= 0.5f;
+	if (m_is_ground) {
 		m_vec.x = 0;
 		m_state = eState_Idle;
-		m_img.ChangeAnimation(eAnimIdle, true);
+		//m_img.ChangeAnimation(eAnimIdle, true);
 	}
 }
 
@@ -147,6 +150,11 @@ void Enemy5::Update()
 		StateAttack();
 		break;
 
+
+	case eState_Damage:
+		StateDamage();
+		break;
+
 		//ダウン状態
 	case eState_Death:
 		StateDeath();
@@ -154,18 +162,18 @@ void Enemy5::Update()
 
 	}
 
-	if (m_grav == true)
-	{
+	/*if (m_grav == true)
+	{*/
 		if (m_is_ground && m_vec.y > GRAVITY * 4)
 			m_is_ground = false;
-	}
+	//}
 
-	if (m_grav == true)
-	{
+	/*if (m_grav == true)
+	{*/
 		//重力による落下処理
 		m_vec.y += GRAVITY;
 		m_pos += m_vec;
-	}
+	//}
 
 	//アニメーションの更新
 	m_img.UpdateAnimation();
@@ -187,34 +195,14 @@ void Enemy5::Collision(Base* b)
 	case eType_Field:
 		//Feild型へキャスト、型変換できたら
 		if (Field* f = dynamic_cast <Field*>(b)) {
-			if (m_state == eState_Death) {
-				//地面より下にいったら
-				if (m_pos.y + 64 > f->GetGroundY()) {
-					//地面の高さに戻す
-					m_pos.y = f->GetGroundY() - 64;
-					//落下速度リセット
-					m_vec.y = 0;
-					//接地フラグON
-					m_is_ground = true;
-				}
-			}
-			else {
-				if (m_pos.y + 64 > f->GetGroundY()) {
-					m_pos.y = f->GetGroundY() - 64;
-					m_vec.y = 0;
-					m_is_ground = true;
-				}
-			}
-		}
-		break;
-
-	case eType_Player_Attack:
-	case eType_Bullet:
-		if (m_state != eState_Death) { // 既に死亡していない場合
-			if (Base::CollisionCircle(this, b)) {
-				TakeDamage(10);
-				b->SetKill();
-
+			//地面より下にいったら
+			if (m_pos.y > f->GetGroundY()) {
+				//地面の高さに戻す
+				m_pos.y = f->GetGroundY();
+				//落下速度リセット
+				m_vec.y = 0;
+				//接地フラグON
+				m_is_ground = true;
 			}
 		}
 		break;
