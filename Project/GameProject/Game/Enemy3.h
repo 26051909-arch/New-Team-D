@@ -4,7 +4,7 @@
 
 class Enemy3 : public Base
 {
-private:
+public:
 
 	//アニメーションの種類
 	enum {
