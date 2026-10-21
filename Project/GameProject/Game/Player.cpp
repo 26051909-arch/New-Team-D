@@ -316,7 +316,7 @@ void Player::Collision(Base* b)
         if (Base::CollisionCircle(this, b)) {
             if (Enemy2* enemy2 = dynamic_cast<Enemy2*>(b)) {
                 //敵2の状態が「死亡状態（繭）」のときだけ中を実行する
-                if (enemy2->m_state == eState_Death) {
+                if (enemy2->m_state == Enemy2::eState_Death) {
                     enemy2->SetKill();
 
 
