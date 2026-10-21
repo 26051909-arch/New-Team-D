@@ -38,13 +38,14 @@ void Enemy5::ToDeath()
 	
 }
 
-
+void Enemy5::TakeDamage(int damage)
+{
 	//HP減少　　下限0
 	m_hp = max(m_hp - damage, 0);
 	if (m_hp <= 0) {
 		ToDeath();
 	}
-	else{
+	else {
 		m_state = eState_Damage;
 		m_img.ChangeAnimation(eAnimIdle, false);
 		const float knockback_x = 14.0f;	// 後ろに吹き飛ぶ強さ
@@ -62,19 +63,17 @@ void Enemy5::ToDeath()
 		m_vec.y = knockback_y;
 		m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
 	}
+}
 
 void Enemy5::StateIdle()
 {
-<<<<<<< HEAD
+
 	//移動量
 	const float move_speed = 3;
 	const float attack_range = 500.0f; // 攻撃を開始する距離(ピクセル)
 	//移動フラグ
 	bool move_flag = true;
-=======
-	const float move_speed = 3.0f;
-	const float attack_range = 140.0f;
->>>>>>> 5b54c6c221526d14721335c24080a0f80c30ad01
+
 
 	Base* player = Base::FindObject(eType_Player);
 	if (player != nullptr) {
@@ -92,7 +91,7 @@ void Enemy5::StateIdle()
 		m_pos.x += move_speed;
 		if (m_pos.x > SCREEN_WIDTH + 250) {
 			SetKill();
-
+		}
 	}
 	else {
 		m_pos.x -= move_speed;

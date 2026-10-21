@@ -1,13 +1,13 @@
 ﻿#pragma once 
 #include "Base/Base.h"
 
-class Enemy5 : public Base 
+class Enemy5 : public Base
 {
 public:
 	enum {
 		eAnimIdle = 0,
 		eAnimAttack,
-		eAnimDeath, 
+		eAnimDeath,
 	};
 
 	enum {
@@ -24,21 +24,20 @@ public:
 
 	float m_hp;
 	int m_death_timer;
-	bool m_flip; 
+	bool m_flip;
 	bool m_is_ground;
 	CImage m_img;
 
 public:
 	Enemy5(const CVector2D& pos, bool flip);
-	void ToDeath(); 
+	void ToDeath();
 	void TakeDamage(int damage);
-	void Update() override; 
+	void Update() override;
 	void Draw() override;
 	void Collision(Base* b) override;
-	static TexAnimData _anim_data[];
-	int m_state;
 
 	static TexAnimData _anim_data[];
 
 	//状態変数
 	int m_state;
+};
