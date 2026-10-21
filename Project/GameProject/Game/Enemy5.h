@@ -3,7 +3,7 @@
 
 class Enemy5 : public Base 
 {
-private:
+public:
 	enum {
 		eAnimIdle = 0,
 		eAnimAttack,
@@ -38,4 +38,7 @@ public:
 	static TexAnimData _anim_data[];
 	int m_state;
 
-};
+	static TexAnimData _anim_data[];
+
+	//状態変数
+	int m_state;

@@ -20,12 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Base.h" />
+    <ClInclude Include="Game\BigBullet.h" />
     <ClInclude Include="Game\Effect.h" />
+    <ClInclude Include="Game\Effect2.h" />
     <ClInclude Include="Game\Enemy1.h" />
     <ClInclude Include="Game\Enemy2.h" />
     <ClInclude Include="Game\Enemy3.h" />
     <ClInclude Include="Game\Enemy4.h" />
     <ClInclude Include="Game\Enemy5.h" />
+    <ClInclude Include="Game\Enemy6.h" />
     <ClInclude Include="Game\Field.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\HP.h" />
@@ -38,12 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Base.cpp" />
+    <ClCompile Include="Game\BigBullet.cpp" />
     <ClCompile Include="Game\Effect.cpp" />
+    <ClCompile Include="Game\Effect2.cpp" />
     <ClCompile Include="Game\Enemy1.cpp" />
     <ClCompile Include="Game\Enemy2.cpp" />
     <ClCompile Include="Game\Enemy3.cpp" />
     <ClCompile Include="Game\Enemy4.cpp" />
     <ClCompile Include="Game\Enemy5.cpp" />
+    <ClCompile Include="Game\Enemy6.cpp" />
     <ClCompile Include="Game\Field.cpp" />
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\HP.cpp" />

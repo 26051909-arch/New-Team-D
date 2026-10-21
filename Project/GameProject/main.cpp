@@ -5,8 +5,11 @@
 #include"Game/Enemy3.h"
 #include "Game/Enemy4.h"
 #include "Game/Enemy5.h"
+#include"Game/Enemy6.h"
 #include "Game/SpiderBullet.h"
+#include"Game/BigBullet.h"
 #include "Game/Effect.h"
+#include"Game/Effect2.h"
 #include "Game/Field.h"
 #include "Game/UI.h"
 #include"Game/Hp.h"
@@ -103,12 +106,15 @@ void Init(void)
 	ADD_RESOURCE("Enemy2", CImage::CreateImage("Image/Enemy/蟻.png", Enemy2::_anim_data, 32, 32));
 	ADD_RESOURCE("Enemy3", CImage::CreateImage("Image/Enemy/コガネムシ.png", Enemy3::_anim_data, 32, 32));
 
+	ADD_RESOURCE("Enemy5", CImage::CreateImage("Image/Enemy/カマキリ.png", Enemy5::_anim_data, 64, 64));
 
 	ADD_RESOURCE("Enemy4", CImage::CreateImage("Image/Enemy/蝶.png", Enemy4::_anim_data, 360, 360));
+	ADD_RESOURCE("Enemy6", CImage::CreateImage("Image/Enemy/巨大クモ.png", Enemy6::_anim_data, 32, 32));
 
 
 	ADD_RESOURCE("Effect", CImage::CreateImage("Image/Player/web.png", Player::_anim_data, 1024, 1024));
-	
+	ADD_RESOURCE("Effect2", CImage::CreateImage("Image/Enemy/Retro Impact Effect Pack 3 B.png", Effect2::_anim_data, 32, 32));
+
 	
 
 
@@ -120,6 +126,7 @@ void Init(void)
 
 
 	ADD_RESOURCE("SpiderBullet", CImage::CreateImage("Image/Player/SpiderBullet.png"));
+	ADD_RESOURCE("BigBullet", CImage::CreateImage("Image/Enemy/デカいSpiderBullet.png"));
 
 
 
@@ -135,7 +142,8 @@ void Init(void)
 
 
 	//川村
-	ADD_RESOURCE("Enemy5", CImage::CreateImage("Image/Enemy/カマキリ.png", Enemy5::_anim_data, 64, 64));
+	
+	//ADD_RESOURCE("Enemy5", CImage::CreateImage("Image/Enemy/カマキリ.png", Enemy5::_anim_data, 64, 64));
 	ADD_RESOURCE("Back_Ground", CImage::CreateImage("Image/Field/Back_Ground.png", Field::_anim_data, 724, 543));
 	ADD_RESOURCE("UIFont", CFont::CreateInstance("UIFont", "C:\\Windows\\Fonts\\msgothic.ttc", 60));
 	ADD_RESOURCE("Title", CImage::CreateImage("Image/Title/Title.png"));

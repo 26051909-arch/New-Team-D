@@ -21,6 +21,7 @@ Enemy3::Enemy3(const CVector2D& pos, bool flip) : Base(eType_Enemy3)
 	m_state = eState_Idle;
 	//着地フラグ
 	m_is_ground = true;
+	m_max_turn_count = 3;
 	// 方向転換回数を初期化
 	m_turn_count = 0;
 
@@ -42,12 +43,12 @@ void Enemy3::ToDeath()
 void Enemy3::StateIdle()
 {
 	//移動量
-	float move_speed = 5;
+	float move_speed = 7;
 
 	Base* player = Base::FindObject(eType_Player);
 
 	// 方向転換できる回数が残っている場合だけ判定
-	if (player != nullptr && m_turn_count < m_max_turn_count)
+	if (player != nullptr && m_turn_count <= m_max_turn_count)
 	{
 		// プレイヤーが敵より右側にいる場合
 		if (player->m_pos.x > m_pos.x) {
@@ -56,10 +57,13 @@ void Enemy3::StateIdle()
 			if (m_flip == false)
 			{
 				m_flip = true;
-				m_turn_count++;
 
 				// 突進速度に変更
-				move_speed = 15.0f;
+				move_speed = 10.0f;
+
+				m_pos.x += move_speed;
+				m_turn_count++;
+
 			}
 		}
 
@@ -67,12 +71,15 @@ void Enemy3::StateIdle()
 		else if (player->m_pos.x < m_pos.x) {
 
 			// 右向きから左向きに変わる場合だけカウント
-			if (m_flip == true) {
+			if (m_flip == true) 
+			{
 				m_flip = false;
-				m_turn_count++;
 
 				// 突進速度に変更
-				move_speed = 15.0f;
+				move_speed = 10.0f;
+
+				m_pos.x += -move_speed;
+				m_turn_count++;
 			}
 		}
 	}
