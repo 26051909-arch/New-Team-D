@@ -466,6 +466,7 @@ void Player::Collision(Base* b)
 		break;
 
 
+<<<<<<< HEAD
 	case eType_BigBullet:
 		if (Base::CollisionCircle(this, b)) {
 			
@@ -494,6 +495,32 @@ void Player::Collision(Base* b)
 		break;
 
 
+=======
+	case eType_Enemy5: 
+		if (Base::CollisionCircle(this, b)) {
+			if (Enemy5* enemy5 = dynamic_cast<Enemy5*>(b)) {
+				if (enemy5->m_state == eState_Death) {
+					enemy5->SetKill();
+
+					m_hp += 40.0f;
+					if (m_hp > 500.0f) {
+						m_hp = 500.0f;
+					}
+				}
+				else if (enemy5->m_state == eState_Attack) {
+					m_hp -= 10.0f;
+					if (m_hp <= 0.0f);
+					m_hp = 0.0f;
+					m_state = eState_Death;
+				}
+				else {
+					m_state = eState_Damage;
+					m_img.ChangeAnimation(eAnimDamage, false); 
+				}
+			}
+		}
+		break;
+>>>>>>> 5b54c6c221526d14721335c24080a0f80c30ad01
 	}
 }
 

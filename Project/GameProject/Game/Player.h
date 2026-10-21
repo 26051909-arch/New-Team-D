@@ -18,6 +18,7 @@ private:
 	//ó‘Ô
 	enum {
 		eState_Idle,
+		eState_Attack,
 		eState_Damage,
 		eState_Death,
 

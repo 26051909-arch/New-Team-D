@@ -1,57 +1,44 @@
-﻿#pragma once
-#include"Base/Base.h"
+﻿#pragma once 
+#include "Base/Base.h"
 
-
-class Enemy5 : public Base
+class Enemy5 : public Base 
 {
 public:
-
-	//アニメーションの種類
 	enum {
 		eAnimIdle = 0,
-		eAnimAttack, // 攻撃 (コマ 5〜8)
-		eAnimDeath,
+		eAnimAttack,
+		eAnimDeath, 
 	};
 
-	//状態
 	enum {
 		eState_Idle,
-		eState_Attack, // 攻撃状態
+		eState_Attack,
 		eState_Damage,
-		eState_Death,
-
+		eState_Death, // 死亡状態
 	};
 
-	//各状態での挙動
 	void StateIdle();
 	void StateAttack();
 	void StateDamage();
 	void StateDeath();
 
-	
 	float m_hp;
-	//死亡状態でのタイマー
 	int m_death_timer;
-	//反転フラグ
-	bool m_flip;
-	//着地フラグ
+	bool m_flip; 
 	bool m_is_ground;
-
-	bool m_is_attacked;
-	//重力フラグ
-	int m_grav;
 	CImage m_img;
 
 public:
 	Enemy5(const CVector2D& pos, bool flip);
-	void ToDeath();
+	void ToDeath(); 
 	void TakeDamage(int damage);
-	void Update();
-	void Draw();
-	void Collision(Base* b);
+	void Update() override; 
+	void Draw() override;
+	void Collision(Base* b) override;
+	static TexAnimData _anim_data[];
+	int m_state;
 
 	static TexAnimData _anim_data[];
 
 	//状態変数
 	int m_state;
-};
