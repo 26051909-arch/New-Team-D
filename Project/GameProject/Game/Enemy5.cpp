@@ -13,8 +13,8 @@ Enemy5::Enemy5(const CVector2D & pos, bool flip) : Base(eType_Enemy5)
 	m_img.SetSize(256, 256);
 	m_img.SetCenter(128, 226);*/
 	m_rad = 40;
-	m_img.SetSize(240, 240);
-	m_img.SetCenter(120, 180);
+	m_img.SetSize(280, 280);
+	m_img.SetCenter(140, 200);
 
 
 	m_hp = 50.0f;
@@ -55,7 +55,7 @@ void Enemy5::TakeDamage(int damage) {
 	else{
 		m_state = eState_Damage;
 		m_img.ChangeAnimation(eAnimIdle, false);
-		const float knockback_x = 9.0f;	// 後ろに吹き飛ぶ強さ
+		const float knockback_x = 14.0f;	// 後ろに吹き飛ぶ強さ
 		const float knockback_y = -8.0f;	// 上に少し跳ね上がる強さ（マイナスが上方向）
 
 		if (m_flip == true) {
@@ -76,7 +76,7 @@ void Enemy5::StateIdle()
 {
 	//移動量
 	const float move_speed = 3;
-	const float attack_range = 140.0f; // 攻撃を開始する距離(ピクセル)
+	const float attack_range = 500.0f; // 攻撃を開始する距離(ピクセル)
 	//移動フラグ
 	bool move_flag = true;
 
@@ -162,18 +162,14 @@ void Enemy5::Update()
 
 	}
 
-	/*if (m_grav == true)
-	{*/
-		if (m_is_ground && m_vec.y > GRAVITY * 4)
-			m_is_ground = false;
-	//}
-
-	/*if (m_grav == true)
-	{*/
-		//重力による落下処理
-		m_vec.y += GRAVITY;
-		m_pos += m_vec;
-	//}
+	
+if (m_is_ground && m_vec.y > GRAVITY * 4)
+	m_is_ground = false;
+	
+//重力による落下処理
+m_vec.y += GRAVITY;
+m_pos += m_vec;
+	
 
 	//アニメーションの更新
 	m_img.UpdateAnimation();

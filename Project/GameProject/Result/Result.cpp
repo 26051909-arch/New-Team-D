@@ -20,6 +20,6 @@ Result::Result(int day) : Base(eType_Scene) {
 		m_img.SetSize(1920, 1080);
 		m_img.Draw();
 		if (m_font) { // š ‚±‚±‚Í day ‚Å‚Í‚È‚­ m_day ‚É‚µ‚Ü‚·I 
-			m_font->Draw(800, 650, 1.0f, 1.0f, 1.0f, "%d“ú¶‚«‰„‚Ñ‚½", m_day);
+			m_font->Draw(800, 650, 1.0f, 1.0f, 1.0f, "%d“ú¶‚«‰„‚Ñ‚½", m_day -1);
 		}
 	}

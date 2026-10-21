@@ -4,7 +4,9 @@
 #include"Enemy3.h"
 #include"Enemy4.h"
 #include"Enemy5.h"
+#include"Enemy6.h"
 #include"SpiderBullet.h"
+#include"BigBullet.h"
 #include"Effect2.h"
 #include"Field.h"
 #include "Result/Result.h"
@@ -395,6 +397,35 @@ void Player::Collision(Base* b)
 		break;
 
 
+	case eType_Enemy6:
+		if (Base::CollisionCircle(this, b)) {
+			
+					//敵が通常状態の際はプレイヤーがダメージを食らう
+					m_hp -= 6.0f;
+					m_state = eState_Damage;
+					m_img.ChangeAnimation(eAnimDamage, false);
+
+					// ノックバック処理
+					float knockback_x = 15.0f;  // 後ろに吹き飛ぶ強さ
+					float knockback_y = -13.0f; // 上に少し跳ね上がる強さ（マイナスが上方向）
+
+					if (m_flip == true) {
+						// プレイヤーが右を向いていたなら、左（マイナス方向）へ吹き飛ばす
+						m_vec.x = -knockback_x;
+					}
+					else {
+						// プレイヤーが左を向いていたなら、右（プラス方向）へ吹き飛ばす
+						m_vec.x = knockback_x;
+					}
+					// 上方向に跳ね上がらせる
+					m_vec.y = knockback_y;
+					m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
+			
+		}
+		break;
+
+
+
 	case eType_Effect2:
 		if (Effect2* effect = dynamic_cast<Effect2*>(b)) {
 			if (effect->HitTest(m_pos, m_rad)) {
@@ -431,6 +462,34 @@ void Player::Collision(Base* b)
 				m_vec.y = knockback_y;
 				m_is_ground = false;
 			}
+		}
+		break;
+
+
+	case eType_BigBullet:
+		if (Base::CollisionCircle(this, b)) {
+			
+			m_hp -= 13.0f;
+			m_state = eState_Damage;
+			m_img.ChangeAnimation(eAnimDamage, false);
+
+			// ノックバック処理
+			float knockback_x = 11.0f;  // 後ろに吹き飛ぶ強さ
+			float knockback_y = -11.0f; // 上に少し跳ね上がる強さ（マイナスが上方向）
+
+			if (m_flip == true) {
+				// プレイヤーが右を向いていたなら、左（マイナス方向）へ吹き飛ばす
+				m_vec.x = -knockback_x;
+			}
+			else {
+				// プレイヤーが左を向いていたなら、右（プラス方向）へ吹き飛ばす
+				m_vec.x = knockback_x;
+			}
+			// 上方向に跳ね上がらせる
+			m_vec.y = knockback_y;
+			m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
+
+
 		}
 		break;
 

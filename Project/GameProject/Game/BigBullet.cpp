@@ -13,10 +13,10 @@ BigBullet::BigBullet(const CVector2D& pos, float houkou) : Base(eType_BigBullet)
 	m_houkou = houkou;
 
 	//îºåa
-	m_rad = 200;
+	m_rad = 104;
 
-	m_img.SetSize(400, 400);
-	m_img.SetCenter(200, 200);
+	m_img.SetSize(240, 240);
+	m_img.SetCenter(120, 120);
 
 	m_hp = 50.0f;
 }
@@ -25,7 +25,7 @@ BigBullet::BigBullet(const CVector2D& pos, float houkou) : Base(eType_BigBullet)
 
 void BigBullet::Update()
 {
-	const int move_speed = 5;
+	const int move_speed = 4;
 
 	if (m_houkou == 2) {
 		m_pos.x += move_speed * m_dir;
@@ -44,7 +44,16 @@ void BigBullet::Update()
 
 void BigBullet::Draw()
 {
-	m_img.SetPos(m_pos);
+	//m_img.SetPos(m_pos.x, m_pos.y + 50);
+
+
+	if (m_houkou == 2) {
+		m_img.SetPos(m_pos.x + 60, m_pos.y + 50);
+	}
+	else {
+		m_img.SetPos(m_pos.x - 60, m_pos.y + 50);
+	}
+
 
 	// âEå¸Ç´Ç»ÇÁîΩì]ÅAç∂å¸Ç´Ç»ÇÁÇªÇÃÇ‹Ç‹
 	if (m_dir == 1) {
