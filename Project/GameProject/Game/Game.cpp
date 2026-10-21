@@ -17,7 +17,7 @@ Game::Game() : Base(eType_Scene) {
 	new Enemy2(CVector2D(10, 805), true);
 	//new Enemy3(CVector2D(1800, 805), false);
 	new Enemy4(CVector2D(0, 200), true);
-	new Enemy5(CVector2D(2000, 400), true);
+	new Enemy5(CVector2D(1000, 400), true);
 
 	
 	m_enemy1_time = 0;
