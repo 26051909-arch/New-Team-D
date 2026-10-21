@@ -5,7 +5,7 @@
 #include "HP.h"
 
 
-Enemy5::Enemy5(const CVector2D& pos, bool flip) : Base(eType_Enemy5)
+Enemy5::Enemy5(const CVector2D & pos, bool flip) : Base(eType_Enemy5)
 {
     m_img = COPY_RESOURCE("Enemy5", CImage);
 
@@ -50,7 +50,7 @@ void Enemy5::ToDeath()
         new Effect(m_pos);
         m_img.ChangeAnimation(eAnimDeath); // アニメーションを繭に切り替え
     }
-
+    
 }
 
 
@@ -62,7 +62,7 @@ void Enemy5::TakeDamage(int damage) {
     if (m_hp <= 0) {
         ToDeath();
     }
-    else {
+    else{
         m_state = eState_Damage;
         m_img.ChangeAnimation(eAnimIdle, false);
         const float knockback_x = 14.0f;    // 後ろに吹き飛ぶ強さ
@@ -192,14 +192,14 @@ void Enemy5::Update()
     }
 
 
-
-    if (m_is_ground && m_vec.y > GRAVITY * 4)
-        m_is_ground = false;
-
-    //重力による落下処理
-    m_vec.y += GRAVITY;
-    m_pos += m_vec;
-
+    
+if (m_is_ground && m_vec.y > GRAVITY * 4)
+    m_is_ground = false;
+    
+//重力による落下処理
+m_vec.y += GRAVITY;
+m_pos += m_vec;
+    
 
 
     //アニメーションの更新

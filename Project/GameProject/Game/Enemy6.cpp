@@ -9,7 +9,7 @@ Enemy6::Enemy6(const CVector2D& pos, bool flip) : Base(eType_Enemy6)
 	m_img = COPY_RESOURCE("Enemy6", CImage);
 
 	m_pos = pos;
-	m_rad = 240;
+	m_rad = 200;
 	m_img.SetSize(960, 960);
 	m_img.SetCenter(480, 930);
 
