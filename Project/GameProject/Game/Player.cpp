@@ -18,7 +18,7 @@
 
 
 
-Player::Player(const CVector2D& pos, bool flip) : Base(eType_Player)
+Player::Player(const CVector2D& pos, bool flip) : Base(eType_Player) 
 {
     m_img = COPY_RESOURCE("Player", CImage);
     //座標設定
@@ -143,13 +143,13 @@ void Player::StateIdle()
     else
     {
         if (move_flag) {
-            //走るアニメーション
-            m_img.ChangeAnimation(eAnimRun, true);
-
+                //走るアニメーション
+                m_img.ChangeAnimation(eAnimRun, true);
+                
         }
         else {
-            //待機アニメーション
-            m_img.ChangeAnimation(eAnimIdle, true);
+                //待機アニメーション
+                m_img.ChangeAnimation(eAnimIdle, true);
         }
     }
 
@@ -186,7 +186,7 @@ void Player::StateDeath()
 
 
 
-void Player::Update()
+void Player:: Update()
 {
     m_pos_old = m_pos;
 
@@ -482,30 +482,30 @@ void Player::Collision(Base* b)
 
     case eType_Enemy6:
         if (Base::CollisionCircle(this, b)) {
-
-            //敵が通常状態の際はプレイヤーがダメージを食らう
-            m_hp -= 6.0f;
-            m_state = eState_Damage;
-            m_img.ChangeAnimation(eAnimDamage, false);
-
-
-            // ノックバック処理
-            float knockback_x = 15.0f;  // 後ろに吹き飛ぶ強さ
-            float knockback_y = -13.0f; // 上に少し跳ね上がる強さ（マイナスが上方向）
+            
+                    //敵が通常状態の際はプレイヤーがダメージを食らう
+                    m_hp -= 6.0f;
+                    m_state = eState_Damage;
+                    m_img.ChangeAnimation(eAnimDamage, false);
 
 
-            if (m_flip == true) {
-                // プレイヤーが右を向いていたなら、左（マイナス方向）へ吹き飛ばす
-                m_vec.x = -knockback_x;
-            }
-            else {
-                // プレイヤーが左を向いていたなら、右（プラス方向）へ吹き飛ばす
-                m_vec.x = knockback_x;
-            }
-            // 上方向に跳ね上がらせる
-            m_vec.y = knockback_y;
-            m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
+                    // ノックバック処理
+                    float knockback_x = 15.0f;  // 後ろに吹き飛ぶ強さ
+                    float knockback_y = -13.0f; // 上に少し跳ね上がる強さ（マイナスが上方向）
 
+
+                    if (m_flip == true) {
+                        // プレイヤーが右を向いていたなら、左（マイナス方向）へ吹き飛ばす
+                        m_vec.x = -knockback_x;
+                    }
+                    else {
+                        // プレイヤーが左を向いていたなら、右（プラス方向）へ吹き飛ばす
+                        m_vec.x = knockback_x;
+                    }
+                    // 上方向に跳ね上がらせる
+                    m_vec.y = knockback_y;
+                    m_is_ground = false; // 空中に浮くため接地フラグをOFFにする
+            
         }
         break;
 
@@ -564,7 +564,7 @@ void Player::Collision(Base* b)
 
     case eType_BigBullet:
         if (Base::CollisionCircle(this, b)) {
-
+            
             m_hp -= 13.0f;
             m_state = eState_Damage;
             m_img.ChangeAnimation(eAnimDamage, false);
