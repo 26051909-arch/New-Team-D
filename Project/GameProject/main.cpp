@@ -10,6 +10,7 @@
 #include"Game/BigBullet.h"
 #include "Game/Effect.h"
 #include"Game/Effect2.h"
+#include"Game/Slash.h"
 #include "Game/Field.h"
 #include "Game/UI.h"
 #include"Game/Hp.h"
@@ -114,6 +115,7 @@ void Init(void)
 
 	ADD_RESOURCE("Effect", CImage::CreateImage("Image/Player/web.png", Player::_anim_data, 1024, 1024));
 	ADD_RESOURCE("Effect2", CImage::CreateImage("Image/Enemy/Retro Impact Effect Pack 3 B.png", Effect2::_anim_data, 32, 32));
+	ADD_RESOURCE("Slash", CImage::CreateImage("Image/Enemy/Retro Impact Effect Pack 3 F.png", Slash::_anim_data, 32, 32));
 
 	
 

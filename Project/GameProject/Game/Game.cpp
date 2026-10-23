@@ -25,6 +25,7 @@ Game::Game() : Base(eType_Scene) {
 	m_enemy1_time = 0;
 	m_enemy2_time = 0;
 	m_enemy4_time = 0;
+	m_enemy5_time = 0;
 	m_enemy6_time = 0;
 	new UI();
 
@@ -43,16 +44,16 @@ void Game::Update() {
 
 
 	// 時間帯の設定
-	bool is_morning = (m_day_time < 1800);
+	bool is_morning = (m_day_time < 1500);
 
 	bool is_noon =
-		(m_day_time >= 1800 && m_day_time < 3600);
+		(m_day_time >= 1500 && m_day_time < 3000);
 
 	bool is_evening =
-		(m_day_time >= 3600 && m_day_time < 4500);
+		(m_day_time >= 3000 && m_day_time < 3900);
 
 	bool is_night =
-		(m_day_time >= 4500);
+		(m_day_time >= 3900);
 
 
 
@@ -137,6 +138,26 @@ void Game::Update() {
 		}
 		m_enemy4_time = 0;
 
+	}
+
+
+	// Enemy5：朝・昼に出現（25秒に1回）
+	if (is_noon || is_morning) {
+		m_enemy5_time++;
+
+		if (m_enemy5_time >= 1500) {
+			if (rand() % 2 == 0) {
+				new Enemy5(CVector2D(0, 800), false);
+			}
+			else {
+				new Enemy5(CVector2D(SCREEN_WIDTH + 300, 800), true);
+			}
+
+			m_enemy5_time = 0;
+		}
+	}
+	else {
+		m_enemy5_time = 0;
 	}
 
 

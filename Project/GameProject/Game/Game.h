@@ -11,6 +11,8 @@ private:
 	int m_enemy3_time;
 	//蝶出現用のタイマー
 	int m_enemy4_time;
+	//カマキリ出現用のタイマー
+	int m_enemy5_time;
 	//巨大クモ用のタイマー
 	int m_enemy6_time;
 

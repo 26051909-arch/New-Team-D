@@ -1,6 +1,7 @@
 #include"Enemy5.h"
 #include "Player.h"
 #include"Effect.h"
+#include"Slash.h"
 #include"Field.h"
 #include "HP.h"
 
@@ -21,7 +22,7 @@ Enemy5::Enemy5(const CVector2D & pos, bool flip) : Base(eType_Enemy5)
 
 
 
-    m_hp = 50.0f;
+    m_hp = 110.0f;
 
 
     //反転フラグ
@@ -36,6 +37,9 @@ Enemy5::Enemy5(const CVector2D & pos, bool flip) : Base(eType_Enemy5)
 
 
     m_death_timer = 0;
+
+    m_attack_timer = 0;
+    m_slash_count = 0;
 
 
     m_img.ChangeAnimation(eAnimIdle, true);
@@ -65,8 +69,8 @@ void Enemy5::TakeDamage(int damage) {
     else{
         m_state = eState_Damage;
         m_img.ChangeAnimation(eAnimIdle, false);
-        const float knockback_x = 14.0f;    // 後ろに吹き飛ぶ強さ
-        const float knockback_y = -8.0f;    // 上に少し跳ね上がる強さ（マイナスが上方向）
+        float knockback_x = 12.0f;    // 後ろに吹き飛ぶ強さ
+        float knockback_y = -8.0f;    // 上に少し跳ね上がる強さ（マイナスが上方向）
 
 
         if (m_flip == true) {
@@ -86,39 +90,38 @@ void Enemy5::TakeDamage(int damage) {
 
 void Enemy5::StateIdle()
 {
-    //移動量
-    const float move_speed = 3;
-    const float attack_range = 500.0f; // 攻撃を開始する距離(ピクセル)
-    //移動フラグ
-    bool move_flag = true;
-
+    const float move_speed = 5;
+    const float slash_range = 625.0f;
 
     Base* player = Base::FindObject(eType_Player);
+
     if (player != nullptr) {
         float dist_x = fabsf(player->m_pos.x - m_pos.x);
         float dist_y = fabsf(player->m_pos.y - m_pos.y);
 
+        if (dist_x <= slash_range && dist_y <= 100.0f) {
+            // プレイヤーの方向を向く
+            m_flip = (player->m_pos.x < m_pos.x);
 
-        if (dist_x <= attack_range && dist_y <= 100.0f) {
+            // 直接攻撃状態へ
+            m_attack_timer = 0;
+            m_slash_count = 0;
             m_state = eState_Attack;
-            m_is_attacked = false;
-            m_img.ChangeAnimation(eAnimAttack, false);
+
             return;
         }
     }
 
-
+    // 通常移動
     if (m_flip == false) {
         m_pos.x += move_speed;
-        if (m_pos.x > SCREEN_WIDTH + 250) {
+        if (m_pos.x > SCREEN_WIDTH + 380) {
             SetKill();
-
-
         }
     }
     else {
         m_pos.x -= move_speed;
-        if (m_pos.x < -250) {
+        if (m_pos.x < -380) {
             SetKill();
         }
     }
@@ -138,9 +141,30 @@ void Enemy5::StateDamage() {
 
 
 void Enemy5::StateAttack() {
-    if (m_img.CheckAnimationEnd()) {
-        m_state = eState_Idle;
-        m_img.ChangeAnimation(eAnimIdle, true);
+    m_attack_timer++;
+
+    // 15フレームごとにSlashを発射
+    if (m_attack_timer >= 15) {
+        m_attack_timer = 0;
+
+        CVector2D slash_pos = m_pos;
+
+        // Enemy5はデフォルトで右向き
+        float houkou = m_flip ? 2.0f : 1.0f;
+
+        Slash* slash = new Slash(slash_pos, houkou);
+        slash->m_dir = m_flip ? -1 : 1;
+
+        m_slash_count++;
+
+        // 3発撃ち終わったらクールタイムへ
+        if (m_slash_count >= 2) {
+            m_attack_timer = 0;
+            m_state = eState_Cooldown;
+
+            // 待機アニメーションへ
+            m_img.ChangeAnimation(eAnimIdle, true);
+        }
     }
 }
 
@@ -153,6 +177,21 @@ void Enemy5::StateDeath()
     //8秒経過したら消滅
     if (m_death_timer >= 480) {
         SetKill();
+    }
+}
+
+
+
+void Enemy5::StateCooldown()
+{
+    m_attack_timer++;
+
+    // 120フレーム = 約2秒
+    if (m_attack_timer >= 120) {
+        m_attack_timer = 0;
+        m_state = eState_Idle;
+
+        m_img.ChangeAnimation(eAnimIdle, true);
     }
 }
 
@@ -186,6 +225,11 @@ void Enemy5::Update()
         //ダウン状態
     case eState_Death:
         StateDeath();
+        break;
+
+
+    case eState_Cooldown:
+        StateCooldown();
         break;
 
 

@@ -20,6 +20,7 @@ enum {
     eType_Enemy_Attack,
     eType_Effect,
     eType_Effect2,
+    eType_Slash,
     eType_StickyWeb,
     eType_UI,
     eType_Hp,

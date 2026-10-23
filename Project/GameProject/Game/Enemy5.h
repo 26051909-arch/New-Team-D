@@ -23,8 +23,7 @@ public:
         eState_Attack, // 攻撃状態
         eState_Damage,
         eState_Death,
-
-
+        eState_Cooldown
     };
 
 
@@ -33,6 +32,7 @@ public:
     void StateAttack();
     void StateDamage();
     void StateDeath();
+    void StateCooldown();
 
 
     
@@ -43,6 +43,9 @@ public:
     bool m_flip;
     //着地フラグ
     bool m_is_ground;
+
+    int m_attack_timer; // 溜め・発射間隔・クールタイム用
+    int m_slash_count;  // 発射したSlashの数
 
 
     bool m_is_attacked;
