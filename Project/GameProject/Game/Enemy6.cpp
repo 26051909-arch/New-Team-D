@@ -39,7 +39,7 @@ void Enemy6::StateIdle()
 	const float move_speed = 5.0f;
 
 	//プレイヤーとの停止する距離
-	const float stop_distance = 1100.0f;
+	const float stop_distance = 900.0f;
 
 	//移動フラグ
 	bool move_flag = false;

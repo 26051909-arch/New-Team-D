@@ -23,18 +23,41 @@ UI::UI() : Base(eType_UI) {
 	//m_img_hp = COPY_RESOURCE("HP", CImage);
 
 	m_cnt = 0;
+	m_eat_count = 0;
 
 }
 	void UI::Update() {
 		m_cnt++;
 
-		//プレイヤーがいなくなったらリザルト画面へ
+		/*//プレイヤーがいなくなったらリザルト画面へ
 		if(Base::FindObject(eType_Player) == nullptr)
 		{
 			int day = (m_cnt / 8400) + 1; // 生き延びた日数を計算 
 
+			Player* player = (Player*)Base::FindObject(eType_Player);
+
+			if (player != nullptr) {
+				int eat_count = player->GetEat();
+
+
+				Base::KillAll();
+				new Result(day, eat_count); // 背景画像付きのリザルト画面を生成！
+			}
+		}*/
+
+
+		// プレイヤーがいる間に捕食数を保存
+		Player* player = (Player*)Base::FindObject(eType_Player);
+
+		if (player != nullptr) {
+			m_eat_count = player->GetEat();
+		}
+		else {
+			// プレイヤーがいなくなったらリザルト画面へ
+			int day = (m_cnt / 8400) + 1;
+
 			Base::KillAll();
-			new Result(day); // 背景画像付きのリザルト画面を生成！ 
+			new Result(day, m_eat_count);
 		}
 	
 	}

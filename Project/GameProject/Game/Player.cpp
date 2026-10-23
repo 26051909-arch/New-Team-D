@@ -38,6 +38,10 @@ Player::Player(const CVector2D& pos, bool flip) : Base(eType_Player)
     m_state = eState_Idle;
     //着地フラグ
     m_is_ground = true;
+
+    //捕食数
+    m_eat_count = 0;
+
     m_img.ChangeAnimation(eAnimIdle);
 }
 
@@ -302,6 +306,7 @@ void Player::Collision(Base* b)
             //体力を10回復
             m_hp += 10.0f;
 
+            m_eat_count++;
 
             //HPが最大値500を超えないように制限
             if (m_hp > 500.0f) {
@@ -324,6 +329,7 @@ void Player::Collision(Base* b)
                     // 体力を20回復
                     m_hp += 20.0f;
 
+                    m_eat_count++;
 
                     // HPが最大値500を超えないように制限
                     if (m_hp > 500.0f) {
@@ -374,6 +380,8 @@ void Player::Collision(Base* b)
                     // 体力を30回復
                     m_hp += 30.0f;
 
+                    m_eat_count++;
+
 
                     // HPが最大値500を超えないように制限
                     if (m_hp > 500.0f) {
@@ -419,6 +427,8 @@ void Player::Collision(Base* b)
             //体力を40回復
             m_hp += 40.0f;
 
+            m_eat_count++;
+
 
             //HPが最大値500を超えないように制限
             if (m_hp > 500.0f) {
@@ -440,6 +450,8 @@ void Player::Collision(Base* b)
 
                     // 体力を30回復
                     m_hp += 65.0f;
+
+                    m_eat_count++;
 
 
                     // HPが最大値500を超えないように制限

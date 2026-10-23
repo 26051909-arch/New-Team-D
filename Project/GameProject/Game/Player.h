@@ -59,4 +59,12 @@ public:
 			m_hp = 0;
 	}
 
+	int GetEat() {
+		return m_eat_count;
+	}
+
+
+	//•ßH”
+	int m_eat_count;
+
 };

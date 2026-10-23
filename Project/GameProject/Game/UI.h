@@ -12,5 +12,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	
+
+	int m_eat_count;
 };
 //extern TexAnimData hp_anim_data[];
