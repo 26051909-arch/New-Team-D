@@ -113,8 +113,8 @@ void Enemy6::StateIdle()
 			}
 
 
-			//4秒経過したら行動
-			if (m_shot_timer >= 240 && !m_is_action) {
+			//3秒経過したら行動
+			if (m_shot_timer >= 180 && !m_is_action) {
 
 				//タイマーリセット
 				m_shot_timer = 0;
