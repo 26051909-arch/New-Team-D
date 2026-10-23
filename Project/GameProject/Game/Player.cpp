@@ -303,8 +303,8 @@ void Player::Collision(Base* b)
     case eType_Enemy1:
         if (Base::CollisionCircle(this, b)) {
             b->SetKill();
-            //‘Ì—Í‚ð10‰ñ•œ
-            m_hp += 10.0f;
+            //‘Ì—Í‚ð15‰ñ•œ
+            m_hp += 15.0f;
 
             m_eat_count++;
 
@@ -326,8 +326,8 @@ void Player::Collision(Base* b)
                     enemy2->SetKill();
 
 
-                    // ‘Ì—Í‚ð20‰ñ•œ
-                    m_hp += 20.0f;
+                    // ‘Ì—Í‚ð25‰ñ•œ
+                    m_hp += 25.0f;
 
                     m_eat_count++;
 
@@ -377,8 +377,8 @@ void Player::Collision(Base* b)
                     enemy3->SetKill();
 
 
-                    // ‘Ì—Í‚ð30‰ñ•œ
-                    m_hp += 30.0f;
+                    // ‘Ì—Í‚ð35‰ñ•œ
+                    m_hp += 35.0f;
 
                     m_eat_count++;
 
@@ -424,8 +424,8 @@ void Player::Collision(Base* b)
     case eType_Enemy4:
         if (Base::CollisionCircle(this, b)) {
             b->SetKill();
-            //‘Ì—Í‚ð40‰ñ•œ
-            m_hp += 40.0f;
+            //‘Ì—Í‚ð45‰ñ•œ
+            m_hp += 45.0f;
 
             m_eat_count++;
 
@@ -448,7 +448,7 @@ void Player::Collision(Base* b)
                     enemy5->SetKill();
 
 
-                    // ‘Ì—Í‚ð30‰ñ•œ
+                    // ‘Ì—Í‚ð65‰ñ•œ
                     m_hp += 65.0f;
 
                     m_eat_count++;
